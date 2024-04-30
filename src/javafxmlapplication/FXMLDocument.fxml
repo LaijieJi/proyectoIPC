@@ -41,7 +41,7 @@
                   <Insets left="80.0" right="80.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="373.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="372.0">
                <children>
                   <Text fx:id="userMessage" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
