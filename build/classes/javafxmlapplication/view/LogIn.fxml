@@ -32,7 +32,7 @@
                               <Label fx:id="passwordErrorText" />
                            </children>
                         </VBox>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onButtonPressed" text="Log In" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonPressed" text="Log In" />
                      </children>
                      <padding>
                         <Insets left="200.0" right="200.0" />
@@ -41,7 +41,7 @@
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Text fx:id="signupText" strokeType="OUTSIDE" strokeWidth="0.0" text="If you do not have an account yet, sign up here:" />
-                        <Button fx:id="signupButton" mnemonicParsing="false" text="Sign Up" />
+                        <Button fx:id="signupButton" mnemonicParsing="false" onAction="#onSignUpButtonPressed" text="Sign Up" />
                      </children>
                   </HBox>
                </children>
