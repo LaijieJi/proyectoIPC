@@ -31,6 +31,8 @@ public class ManageCategoriesController implements Initializable {
     private Button newExpenseButton;
     @FXML
     private ListView<?> expenseList;
+    @FXML
+    private Button deleteCategoryButton;
 
     /**
      * Initializes the controller class.
@@ -55,6 +57,10 @@ public class ManageCategoriesController implements Initializable {
 
     @FXML
     private void onAddButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onDeleteCategoryButtonPressed(ActionEvent event) {
     }
     
 }
