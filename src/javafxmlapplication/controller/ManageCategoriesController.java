@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package javafxmlapplication.view;
+package javafxmlapplication.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +19,7 @@ import javafx.stage.Stage;
  *
  * @author laijie
  */
-public class ExpenseAccountController implements Initializable {
+public class ManageCategoriesController implements Initializable {
     
     private Stage primaryStage;
     private Scene primaryScene;
@@ -30,11 +28,11 @@ public class ExpenseAccountController implements Initializable {
     @FXML
     private Button backButton;
     @FXML
-    private MenuButton compareOptions;
-    @FXML
-    private ChoiceBox<?> categorySelector;
+    private Button newExpenseButton;
     @FXML
     private ListView<?> expenseList;
+    @FXML
+    private Button deleteCategoryButton;
 
     /**
      * Initializes the controller class.
@@ -43,18 +41,26 @@ public class ExpenseAccountController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    public void initExpenseAccountPage(Stage stage){
+
+    public void initManageCategoriesPage(Stage stage){
         primaryStage = stage;
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
     }
-
+    
     @FXML
     private void onBackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
         primaryStage.show();
+    }
+
+    @FXML
+    private void onAddButtonPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onDeleteCategoryButtonPressed(ActionEvent event) {
     }
     
 }
