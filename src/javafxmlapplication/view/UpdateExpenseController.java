@@ -6,7 +6,10 @@ package javafxmlapplication.view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -15,6 +18,11 @@ import javafx.fxml.Initializable;
  */
 public class UpdateExpenseController implements Initializable {
 
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button saveButton;
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +30,13 @@ public class UpdateExpenseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void cancelAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void saveAction(ActionEvent event) {
+    }
     
 }
