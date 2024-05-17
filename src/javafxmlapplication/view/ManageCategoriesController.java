@@ -4,14 +4,22 @@
  */
 package javafxmlapplication.view;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -56,11 +64,30 @@ public class ManageCategoriesController implements Initializable {
     }
 
     @FXML
-    private void onAddButtonPressed(ActionEvent event) {
+    private void onAddButtonPressed(ActionEvent event) throws IOException{
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/ModifyCategory.fxml"));
+        AnchorPane root = (AnchorPane) myLoader.load();
+        
+        Scene scene = new Scene(root,400,400);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Add category");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 
     @FXML
     private void onDeleteCategoryButtonPressed(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete category");
+        alert.setContentText("Are you sure you want to delete this category?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
     }
     
 }
