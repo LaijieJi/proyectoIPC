@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="563.0" prefWidth="567.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </BorderPane.margin>
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name *" />
+            <TextField promptText="Name" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Surname *" />
+            <TextField promptText="Surname" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail *" />
+            <TextField promptText="E-mail" />
+            <Separator prefWidth="200.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname *" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="()" />
+            <TextField promptText="Nickname" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password *" />
+            <TextField promptText="Password" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="* Identifies compulsory fields" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Picture" />
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+            <Button mnemonicParsing="false" text="Select an image" />
+         </children></VBox>
+   </center>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.5999755859375" minWidth="10.0" prefWidth="395.9999755859375" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="700.1999969482422" minWidth="10.0" prefWidth="525.6000244140625" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" text="◄" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" wrappingWidth="139.08782958984375" GridPane.columnIndex="1">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" right="20.0" top="20.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </top>
+   <bottom>
+      <Button mnemonicParsing="false" text="Create account" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
