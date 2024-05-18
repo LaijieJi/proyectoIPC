@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -47,7 +47,7 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="235.0">
+                              <TextField fx:id="nameField" prefHeight="26.0" prefWidth="235.0">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
@@ -68,7 +68,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField>
+                        <TextField fx:id="surnameField">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
@@ -84,7 +84,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField>
+                        <TextField fx:id="emailField">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
@@ -106,16 +106,12 @@
                            <font>
                               <Font size="10.0" />
                            </font></Text>
-                        <TextField>
+                        <TextField fx:id="usernameField">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </TextField>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="Username already in use" StackPane.alignment="TOP_LEFT" />
-                              <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="Cannot contain blank spaces" StackPane.alignment="TOP_LEFT" />
-                           </children></StackPane>
+                        <Text fx:id="usernameMessageText" fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="504.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
@@ -129,11 +125,11 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="454.0">
+                              <TextField fx:id="passwordField" prefHeight="26.0" prefWidth="454.0">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin></TextField>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="👁">
+                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" onAction="#onViewPasswordButtonPressed" prefHeight="26.0" prefWidth="33.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin></Button>
@@ -161,8 +157,8 @@
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Text fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
-                                    <Text fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
+                                    <Text fx:id="sixCharLengthText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
+                                    <Text fx:id="alphanumCharOnlyText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
                                  </children>
                               </VBox>
                            </children></StackPane>
@@ -183,11 +179,11 @@
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <ImageView fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePicture" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></ImageView>
-            <Button mnemonicParsing="false" text="Select an image" />
+            <Button fx:id="selectImageButton" mnemonicParsing="false" onAction="#onSelectImageButtonPressed" text="Select an image" />
          </children>
          <BorderPane.margin>
             <Insets left="20.0" right="70.0" top="20.0" />
@@ -197,7 +193,7 @@
    <bottom>
       <AnchorPane prefHeight="129.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="379.0" layoutY="37.99999999999999" mnemonicParsing="false" prefHeight="33.0" prefWidth="168.0" text="CREATE ACCOUNT" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="375.0" />
+            <Button fx:id="createAccountButton" layoutX="379.0" layoutY="37.99999999999999" mnemonicParsing="false" onAction="#onCreateAccountButtonPressed" prefHeight="33.0" prefWidth="168.0" text="CREATE ACCOUNT" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="375.0" />
          </children>
       </AnchorPane>
    </bottom>
@@ -209,7 +205,7 @@
                   <Font size="48.0" />
                </font>
             </Text>
-            <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" text="◄" />
+            <Button fx:id="goBackButton" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" text="◄" />
             <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.05078125" />
          </children>
       </AnchorPane>
