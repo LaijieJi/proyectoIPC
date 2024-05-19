@@ -21,6 +21,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Acount;
+import model.AcountDAOException;
 
 /**
  * FXML Controller class
@@ -32,6 +34,8 @@ public class ManageCategoriesController implements Initializable {
     private Stage primaryStage;
     private Scene primaryScene;
     private String primaryTitle;
+    
+    private Acount account;
 
     @FXML
     private Button backButton;
@@ -47,7 +51,13 @@ public class ManageCategoriesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try{
+            account = Acount.getInstance();
+        } catch (AcountDAOException e) {
+            System.err.println(e);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
     }    
 
     public void initManageCategoriesPage(Stage stage){

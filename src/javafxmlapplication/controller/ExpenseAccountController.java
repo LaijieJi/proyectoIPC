@@ -4,6 +4,7 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,6 +16,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
+import model.Acount;
+import model.AcountDAOException;
 
 /**
  * FXML Controller class
@@ -26,6 +29,8 @@ public class ExpenseAccountController implements Initializable {
     private Stage primaryStage;
     private Scene primaryScene;
     private String primaryTitle;
+    
+    private Acount account;
 
     @FXML
     private Button backButton;
@@ -41,7 +46,13 @@ public class ExpenseAccountController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try{
+            account = Acount.getInstance();
+        } catch (AcountDAOException e) {
+            System.err.println(e);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
     }    
     
     public void initExpenseAccountPage(Stage stage){

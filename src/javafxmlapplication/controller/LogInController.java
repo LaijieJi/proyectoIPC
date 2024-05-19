@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,6 +37,8 @@ public class LogInController implements Initializable {
     private String primaryTitle;
     
     private Acount account;
+    
+    private String password;
 
     @FXML
     private TextField nickNameInput;
@@ -51,6 +54,8 @@ public class LogInController implements Initializable {
     private Button signupButton;
     @FXML
     private PasswordField passwordInput;
+    @FXML
+    private Button seePasswordButton;
 
     /**
      * Initializes the controller class.
@@ -64,6 +69,16 @@ public class LogInController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        seePasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            password = passwordInput.getText();
+            passwordInput.clear();
+            passwordInput.setPromptText(password);
+        });
+        seePasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            passwordInput.setText(password);
+            passwordInput.setPromptText("Password");
+        });
     }    
     
     public void initLogin(Stage stage){
@@ -124,7 +139,6 @@ public class LogInController implements Initializable {
         primaryStage.setTitle("Sign Up");
     }
     
-    @FXML
     private void handleOnActionButtonBack(ActionEvent event) {
             primaryStage.setScene(primaryScene);
             primaryStage.setTitle(primaryTitle); 
@@ -142,5 +156,5 @@ public class LogInController implements Initializable {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Page");
     }
-    
+
 }
