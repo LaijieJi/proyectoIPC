@@ -2,85 +2,212 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.SignUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <left>
-      <VBox prefHeight="563.0" prefWidth="567.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="10.0" right="10.0" />
+            <Insets left="80.0" right="10.0" />
          </BorderPane.margin>
          <children>
-            <GridPane>
+            <GridPane alignment="TOP_CENTER" prefHeight="413.0" prefWidth="496.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.1999969482422" minWidth="10.0" prefWidth="249.19998779296873" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="205.59996337890624" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.20001220703125" minWidth="0.0" prefWidth="50.40003662109376" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="55.000003051757815" minHeight="10.0" prefHeight="53.39999694824219" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="78.59998168945313" minHeight="10.0" prefHeight="61.19999389648437" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.4" minHeight="10.0" prefHeight="85.20000610351562" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="144.79998779296872" minHeight="10.0" prefHeight="78.4" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="103.19999999999999" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name *">
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font></Text>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="nameField" prefHeight="26.0" prefWidth="235.0">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </HBox.margin></TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </VBox>
+                  <Text fill="#6b6b6b" strokeType="OUTSIDE" strokeWidth="0.0" text="(*) Identifies compulsory fields" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Surname *">
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font></Text>
+                        <TextField fx:id="surnameField">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></TextField>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail *">
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font></Text>
+                        <TextField fx:id="emailField">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="94.0" prefWidth="450.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username *">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font></Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please, choose your username carefully. You won't be able to change it after creating the account.">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="10.0" />
+                           </font></Text>
+                        <TextField fx:id="usernameField">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
+                        <Text fx:id="usernameMessageText" fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="504.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password *">
+                           <VBox.margin>
+                              <Insets bottom="2.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font></Text>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="passwordField" prefHeight="26.0" prefWidth="454.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin></TextField>
+                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" onAction="#onViewPasswordButtonPressed" prefHeight="26.0" prefWidth="33.0" text="👁">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin></Button>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="→ At least 6 characters long" />
+                                    <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="→ Alphanumeric characters only" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
+                                    <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="→ Alphanumeric characters only" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="→ At least 6 characters long" />
+                                    <Text fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text fx:id="sixCharLengthText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
+                                    <Text fx:id="alphanumCharOnlyText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
+                                 </children>
+                              </VBox>
+                           </children></StackPane>
+                     </children>
+                  </VBox>
+               </children>
             </GridPane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name *" />
-            <TextField promptText="Name" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Surname *" />
-            <TextField promptText="Surname" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail *" />
-            <TextField promptText="E-mail" />
-            <Separator prefWidth="200.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname *" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="()" />
-            <TextField promptText="Nickname" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password *" />
-            <TextField promptText="Password" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="* Identifies compulsory fields" />
          </children>
       </VBox>
    </left>
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="497.0" prefWidth="533.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Picture" />
-            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" text="Select an image" />
-         </children></VBox>
-   </center>
-   <top>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.5999755859375" minWidth="10.0" prefWidth="395.9999755859375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="700.1999969482422" minWidth="10.0" prefWidth="525.6000244140625" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" text="◄" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" wrappingWidth="139.08782958984375" GridPane.columnIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile Picture">
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
                <font>
-                  <Font size="36.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="20.0" right="20.0" top="20.0" />
-               </GridPane.margin>
-            </Text>
+                  <Font size="14.0" />
+               </font></Text>
+            <ImageView fx:id="profilePicture" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></ImageView>
+            <Button fx:id="selectImageButton" mnemonicParsing="false" onAction="#onSelectImageButtonPressed" text="Select an image" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+            <Insets left="20.0" right="70.0" top="20.0" />
          </BorderPane.margin>
-      </GridPane>
-   </top>
+      </VBox>
+   </center>
    <bottom>
-      <Button mnemonicParsing="false" text="Create account" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="129.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="createAccountButton" layoutX="379.0" layoutY="37.99999999999999" mnemonicParsing="false" onAction="#onCreateAccountButtonPressed" prefHeight="33.0" prefWidth="168.0" text="CREATE ACCOUNT" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="375.0" />
+         </children>
+      </AnchorPane>
    </bottom>
+   <top>
+      <AnchorPane prefHeight="99.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="371.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="370.4828125">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+            <Button fx:id="goBackButton" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" text="◄" />
+            <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.05078125" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

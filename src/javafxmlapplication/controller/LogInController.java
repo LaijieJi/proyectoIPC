@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package javafxmlapplication.view;
+package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -113,11 +113,11 @@ public class LogInController implements Initializable {
     @FXML
     private void onSignUpButtonPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignUp.fxml"));
-        Stage stage = new Stage();
+        //Stage stage = new Stage();
         BorderPane root = loader.load();
         // TODO: Add controller and call the init method similar to
-        //FXMLWindow2Controller win2Controller = myLoader.<FXMLWindow2Controller>getController();
-        //win2Controller.initWindow2(primaryStage);
+        SignUpController signUpController = loader.<SignUpController>getController();
+        signUpController.initSignUp(primaryStage);
         
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -131,7 +131,7 @@ public class LogInController implements Initializable {
     }
     
     private void onUserLogged() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
         Stage stage = new Stage();
         BorderPane root = loader.load();
         // TODO: Add controller and call the init method similar to
