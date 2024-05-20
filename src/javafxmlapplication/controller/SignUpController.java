@@ -6,9 +6,11 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -166,8 +169,33 @@ public class SignUpController implements Initializable {
             System.out.println("everything ok");
         }
         
+        boolean registered = false;
         // TODO: finish this creating the account
+        try{
+            registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, null, LocalDate.now());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         
+        if(registered) {
+            /*
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
+                //Stage stage = new Stage();
+                BorderPane root = loader.load();
+
+                LogInController logInController = loader.<LogInController>getController();
+                logInController.initLogin(primaryStage);
+
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("Log in");
+            } catch (Exception e) {
+                System.err.println(e);
+            }*/
+            primaryStage.setScene(primaryScene);
+            primaryStage.setTitle(primaryTitle); 
+        }
     }
     
     public boolean isAlphanumeric(String str) {
