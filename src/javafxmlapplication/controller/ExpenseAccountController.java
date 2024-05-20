@@ -6,7 +6,11 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +19,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import model.Acount;
 import model.AcountDAOException;
+import model.Category;
 
 /**
  * FXML Controller class
@@ -25,6 +34,9 @@ import model.AcountDAOException;
  * @author laijie
  */
 public class ExpenseAccountController implements Initializable {
+    
+    List<Category> catList = null;
+    ObservableList<Category> observableCatList = null;
     
     private Stage primaryStage;
     private Scene primaryScene;
@@ -37,7 +49,7 @@ public class ExpenseAccountController implements Initializable {
     @FXML
     private MenuButton compareOptions;
     @FXML
-    private ChoiceBox<?> categorySelector;
+    private ChoiceBox<Category> categorySelector;
     @FXML
     private ListView<?> expenseList;
 
@@ -53,6 +65,36 @@ public class ExpenseAccountController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        try{
+            catList = account.getUserCategories();    
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        
+        categorySelector.setItems(observableCatList);
+        
+        categorySelector.setConverter(new StringConverter<Category>() {
+            @Override
+            public String toString(Category cat) {
+                return cat.getName();
+            }
+
+            @Override
+            public Category fromString(String string) {
+                return null;
+            }
+        });
+        
+        observableCatList = FXCollections.observableList(catList);
+        categorySelector.selectionModelProperty().addListener((ob, oldVal, newVal) -> {
+            for(Category cat : observableCatList) {
+                if(newVal.equals(cat)) {
+                    // TODO: Filter by this cat
+                }
+            }
+        });
+        categorySelector.getSelectionModel().getSelectedItem();
+        
     }    
     
     public void initExpenseAccountPage(Stage stage){
