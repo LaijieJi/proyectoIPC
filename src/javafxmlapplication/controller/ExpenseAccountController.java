@@ -65,6 +65,7 @@ public class ExpenseAccountController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
         try{
             catList = account.getUserCategories();    
         } catch (Exception e) {
@@ -87,11 +88,8 @@ public class ExpenseAccountController implements Initializable {
         
         observableCatList = FXCollections.observableList(catList);
         categorySelector.selectionModelProperty().addListener((ob, oldVal, newVal) -> {
-            for(Category cat : observableCatList) {
-                if(newVal.equals(cat)) {
-                    // TODO: Filter by this cat
-                }
-            }
+            
+            // TODO: Filter by Category
         });
         categorySelector.getSelectionModel().getSelectedItem();
         
