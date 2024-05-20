@@ -74,6 +74,12 @@ public class MainController implements Initializable {
             System.err.println(ioe);
         }
     }    
+    
+    public void initMain(Stage stage) {
+        primaryStage = stage;
+        primaryScene = primaryStage.getScene();
+        primaryTitle = primaryStage.getTitle();
+    }
 
     @FXML
     private void editProfile(ActionEvent event) {

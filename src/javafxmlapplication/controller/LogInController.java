@@ -62,6 +62,8 @@ public class LogInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        // testing credentials -> username: test, password: test123
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
@@ -148,9 +150,9 @@ public class LogInController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
         Stage stage = new Stage();
         BorderPane root = loader.load();
-        // TODO: Add controller and call the init method similar to
-        //FXMLWindow2Controller win2Controller = myLoader.<FXMLWindow2Controller>getController();
-        //win2Controller.initWindow2(primaryStage);
+        
+        MainController mainController = loader.<MainController>getController();
+        mainController.initMain(primaryStage);
         
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
