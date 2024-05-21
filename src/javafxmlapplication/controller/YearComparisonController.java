@@ -51,6 +51,15 @@ public class YearComparisonController implements Initializable {
 
     @FXML
     private void onGoBackButtonPressed(ActionEvent event) {
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
+    }
+    
+    public void initYearComparisonPage(Stage stage){
+        primaryStage = stage;
+        primaryScene = primaryStage.getScene();
+        primaryTitle = primaryStage.getTitle();
     }
     
 }
