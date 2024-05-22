@@ -11,11 +11,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SameMonthLastYearController">
    <top>
       <StackPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Same month from last year" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#onGoBackButtonPressed" text="&lt;">
@@ -27,11 +31,6 @@
                <StackPane.margin>
                   <Insets left="10.0" />
                </StackPane.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Same month from last year" />
-               </children>
             </HBox>
          </children>
       </StackPane>

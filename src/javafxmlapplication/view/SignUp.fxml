@@ -35,6 +35,7 @@
                   <RowConstraints maxHeight="103.4" minHeight="10.0" prefHeight="85.20000610351562" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="144.79998779296872" minHeight="10.0" prefHeight="78.4" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="103.19999999999999" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="103.19999999999999" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -142,6 +143,17 @@
                                  </children>
                               </VBox>
                            </children></StackPane>
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="false" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                     <children>
+                        <Text fx:id="passwordLabel1" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm password *">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="confirmPasswordField" onKeyTyped="#onTextWritten" prefHeight="26.0" prefWidth="460.0" />
+                        <Text fx:id="confirmPasswordMessage" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Passwords match" />
                      </children>
                   </VBox>
                </children>

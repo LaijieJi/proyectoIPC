@@ -6,6 +6,7 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,9 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
+import model.Category;
 
 /**
  * FXML Controller class
@@ -43,7 +46,7 @@ public class UpdateExpenseController implements Initializable {
     @FXML
     private TextField unitField;
     @FXML
-    private ComboBox<?> categorySelection;
+    private ComboBox<Category> categorySelection;
     @FXML
     private DatePicker dateSelection;
     @FXML
@@ -56,6 +59,7 @@ public class UpdateExpenseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
@@ -65,12 +69,30 @@ public class UpdateExpenseController implements Initializable {
         }
     }    
 
+    public void initUpdateExpense(Stage stage){
+        primaryStage = stage;
+        primaryScene = primaryStage.getScene();
+        primaryTitle = primaryStage.getTitle();
+    }
+    
     @FXML
     private void cancelAction(ActionEvent event) {
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
     }
 
     @FXML
     private void saveAction(ActionEvent event) {
+        Double cost = Double.parseDouble(costField.getText());
+        Integer units = Integer.parseInt(unitField.getText());
+        Image scanImage = null;
+        LocalDate date = dateSelection.getValue();
+        Category category = null;
+        try{
+            account.registerCharge(nameField.getText(), descriptionField.getText(), cost, units, scanImage, date, category);
+        }catch (AcountDAOException e){
+            System.out.println(e);
+        }
     }
 
     @FXML
