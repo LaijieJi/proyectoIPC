@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -157,6 +158,31 @@ public class LogInController implements Initializable {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Page");
+    }
+
+    @FXML
+    private void onKeyPressedOnNickName(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            passwordInput.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnPassword(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            loginButton.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnLogin(KeyEvent event) {
+        try{
+            onLoginButtonPressed(new ActionEvent());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
 }
