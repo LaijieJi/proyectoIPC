@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -79,6 +80,8 @@ public class ManageCategoriesController implements Initializable {
     private void onAddButtonPressed(ActionEvent event) throws IOException{
         FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/ModifyCategory.fxml"));
         AnchorPane root = (AnchorPane) myLoader.load();
+        if (expenseList.getSelectionModel().getSelectedIndex() != -1){
+        }
         
         Scene scene = new Scene(root,400,400);
         Stage stage = new Stage();
@@ -102,6 +105,30 @@ public class ManageCategoriesController implements Initializable {
         }
     }
     public class CategoryCell extends ListCell<Task>{
-    
+        public CategoryCell(){
+            try{
+                loadFXML();
+            }catch (IOException e){
+                throw new RuntimeException(e);
+            }
+        }
+        
+        private void loadFXML() throws IOException{
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("\view"));
+            //loader.setController(this);
+            //loader.setRoot(this);
+            //loader.load();
+        }
+        
+        @Override
+        protected void updateItem(Task item, boolean empty){
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+            }else{
+                //set
+            }
+        }
     }
 }

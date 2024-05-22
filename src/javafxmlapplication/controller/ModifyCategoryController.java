@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
+import model.Category;
 
 /**
  * FXML Controller class
@@ -47,6 +48,7 @@ public class ModifyCategoryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
@@ -54,15 +56,36 @@ public class ModifyCategoryController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
-    }    
+    }  
+    
+    public void initFields(String name, String description){
+        if (name != null && description != null){
+            nameText.setText(name);
+            descriptionText.setText(description);
+        }else{
+            if (name == null){
+                nameText.setPromptText("Write here a name for the category");
+            }
+            if (description == null){
+                descriptionText.setPromptText("Write here a description for the category");
+            }
+        }
+    }
 
     @FXML
     private void acceptAction(ActionEvent event) {
+        try{
+            account.registerCategory(nameText.getText(), descriptionText.getText());
+        }catch (AcountDAOException e){
+            System.err.println(e);
+        }
+        nameText.clear(); descriptionText.clear();
         nameText.getScene().getWindow().hide();
     }
 
     @FXML
     private void cancelAction(ActionEvent event) {
+        nameText.clear(); descriptionText.clear();
         nameText.getScene().getWindow().hide();
     }
     
