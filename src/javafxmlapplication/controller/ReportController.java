@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Acount;
+import model.AcountDAOException;
 
 /**
  * FXML Controller class
@@ -38,13 +40,21 @@ public class ReportController implements Initializable {
     private Button selectLocationButton;
     @FXML
     private Button saveButton;
+    
+    private Acount account;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try{
+            account = Acount.getInstance();
+        } catch (AcountDAOException e) {
+            System.err.println(e);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
     }    
     
     public void initReportPage(Stage stage){

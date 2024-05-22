@@ -8,6 +8,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 .errorText {
-    -fx-text-color: red;
+    -fx-text-fill: red;
 }
 

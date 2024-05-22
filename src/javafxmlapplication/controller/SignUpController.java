@@ -4,17 +4,27 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Acount;
+import model.AcountDAOException;
 
 /**
  * FXML Controller class
@@ -26,6 +36,14 @@ public class SignUpController implements Initializable {
     private Stage primaryStage;
     private Scene primaryScene;
     private String primaryTitle;
+    
+    private String password;
+    
+    private Acount account;
+    
+    // variable used for checking all fields are correct
+    boolean everythingOK = false;
+    
     @FXML
     private Button goBackButton;
     @FXML
@@ -38,8 +56,7 @@ public class SignUpController implements Initializable {
     private TextField usernameField;
     @FXML
     private Text usernameMessageText;
-    @FXML
-    private TextField passwordField;
+    
     @FXML
     private Button viewPasswordButton;
     @FXML
@@ -52,13 +69,46 @@ public class SignUpController implements Initializable {
     private ImageView profilePicture;
     @FXML
     private Button selectImageButton;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Text nameLabel;
+    @FXML
+    private Text surnameLabel;
+    @FXML
+    private Text mailLabel;
+    @FXML
+    private Text usernameLabel;
+    @FXML
+    private Text passwordLabel;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try{
+            account = Acount.getInstance();
+        } catch (AcountDAOException e) {
+            System.err.println(e);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
+        
+        viewPasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            password = passwordField.getText();
+            passwordField.clear();
+            passwordField.setPromptText(password);
+        });
+        viewPasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            passwordField.setText(password);
+            passwordField.setPromptText("Password");
+        });
+        
+        sixCharLengthText.setText("→ At least 6 characters long");
+        sixCharLengthText.setFill(Color.BLACK);
+        alphanumCharOnlyText.setText("→ Alphanumeric characters only");
+        alphanumCharOnlyText.setFill(Color.BLACK);
     }    
     
     public void initSignUp(Stage stage){
@@ -75,17 +125,128 @@ public class SignUpController implements Initializable {
         primaryStage.setTitle(primaryTitle); 
     }
 
-    @FXML
-    private void onViewPasswordButtonPressed(ActionEvent event) {
-    }
 
     @FXML
     private void onCreateAccountButtonPressed(ActionEvent event) {
+        if(nameField.getText().isEmpty()) {
+            nameLabel.setFill(Color.RED);
+            everythingOK &= false;
+        } else {
+            nameLabel.setFill(Color.BLACK);
+        }
+        
+        if(surnameField.getText().isEmpty()) {
+            surnameLabel.setFill(Color.RED);
+            everythingOK &= false; 
+        } else {
+            surnameLabel.setFill(Color.BLACK);
+        }
+        
+        if(usernameField.getText().isEmpty()) {
+            usernameLabel.setFill(Color.RED);
+            everythingOK &= false;
+        } else {
+            usernameLabel.setFill(Color.BLACK);
+        }
+        
+        if(emailField.getText().isEmpty()) {
+            mailLabel.setFill(Color.RED);
+            everythingOK &= false;
+        } else {
+            mailLabel.setFill(Color.BLACK);
+        }
+        
+        password = passwordField.getText();
+        
+        if(password.isEmpty()) {
+            everythingOK &= false;
+            passwordLabel.setFill(Color.RED);
+        } else {
+            passwordLabel.setFill(Color.BLACK);
+        }
+        
+        if(everythingOK) {
+            System.out.println("everything ok");
+        }
+        
+        boolean registered = false;
+        // TODO: finish this creating the account
+        try{
+            registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, null, LocalDate.now());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        
+        if(registered) {
+            /*
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
+                //Stage stage = new Stage();
+                BorderPane root = loader.load();
+
+                LogInController logInController = loader.<LogInController>getController();
+                logInController.initLogin(primaryStage);
+
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("Log in");
+            } catch (Exception e) {
+                System.err.println(e);
+            }*/
+            primaryStage.setScene(primaryScene);
+            primaryStage.setTitle(primaryTitle); 
+        }
+    }
+    
+    public boolean isAlphanumeric(String str) {
+        for (int i=0; i<str.length(); i++) {
+            char c = str.charAt(i);
+            if (c < 0x30 || (c >= 0x3a && c <= 0x40) || (c > 0x5a && c <= 0x60) || c > 0x7a)
+                return false;
+        }
+        return true;
     }
 
     @FXML
     private void onSelectImageButtonPressed(ActionEvent event) {
+        // TODO: implement profile picture selection 
     }
-    
-    
+
+    /**
+    *  Listens to the event in which something is written in the password field and
+    *  evaluates the different cases
+    **/
+    @FXML
+    private void onTextWritten(KeyEvent event) {
+        password = passwordField.getText();
+        
+        if(password.isEmpty()) {
+            passwordLabel.setFill(Color.BLACK);
+            sixCharLengthText.setText("→ At least 6 characters long");
+            sixCharLengthText.setFill(Color.BLACK);
+            alphanumCharOnlyText.setText("→ Alphanumeric characters only");
+            alphanumCharOnlyText.setFill(Color.BLACK);
+        } else {
+            passwordLabel.setFill(Color.BLACK);
+            if(password.length() < 6) {
+                sixCharLengthText.setText("→ At least 6 characters long");
+                sixCharLengthText.setFill(Color.RED);
+                everythingOK = false;
+            } else {
+                sixCharLengthText.setText("🗸 At least 6 characters long");
+                sixCharLengthText.setFill(Color.GREEN);
+                everythingOK = true;
+            }
+            
+            if(isAlphanumeric(password)) {
+                alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
+                alphanumCharOnlyText.setFill(Color.GREEN);
+                if(everythingOK) everythingOK = true;
+            } else {
+                alphanumCharOnlyText.setText("→ Alphanumeric characters only");
+                alphanumCharOnlyText.setFill(Color.RED);
+                everythingOK = false;
+            }
+        }
+    }
 }
