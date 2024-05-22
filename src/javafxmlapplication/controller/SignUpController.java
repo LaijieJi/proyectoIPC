@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,6 +40,7 @@ public class SignUpController implements Initializable {
     private String primaryTitle;
     
     private String password;
+    private String passwordConfirmation;
     
     private Acount account;
     
@@ -81,6 +84,12 @@ public class SignUpController implements Initializable {
     private Text usernameLabel;
     @FXML
     private Text passwordLabel;
+    @FXML
+    private Text passwordLabel1;
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private Text confirmPasswordMessage;
 
     /**
      * Initializes the controller class.
@@ -109,6 +118,7 @@ public class SignUpController implements Initializable {
         sixCharLengthText.setFill(Color.BLACK);
         alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
+        confirmPasswordMessage.setFill(Color.BLACK);
     }    
     
     public void initSignUp(Stage stage){
@@ -128,6 +138,7 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void onCreateAccountButtonPressed(ActionEvent event) {
+        passwordConfirmation = confirmPasswordField.getText();
         if(nameField.getText().isEmpty()) {
             nameLabel.setFill(Color.RED);
             everythingOK &= false;
@@ -165,36 +176,57 @@ public class SignUpController implements Initializable {
             passwordLabel.setFill(Color.BLACK);
         }
         
+        if(passwordConfirmation.isEmpty()) {
+            everythingOK &= false;
+            passwordLabel.setFill(Color.RED);
+        } else {
+            if(passwordConfirmation.equals(password)) {
+                confirmPasswordMessage.setFill(Color.GREEN);
+                confirmPasswordMessage.setText("🗸 Passwords match");
+            } else {
+                everythingOK &= false;
+                confirmPasswordMessage.setText("→ Passwords must match");
+                confirmPasswordMessage.setFill(Color.RED);
+            }
+            passwordLabel.setFill(Color.BLACK);
+        }
+        
+        if(account.existsLogin(usernameField.getText())) {
+            everythingOK &= false;
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error during account creation");
+            alert.setContentText("An account with this username already exists, try with another");
+            alert.showAndWait();
+        }
+        
         if(everythingOK) {
             System.out.println("everything ok");
-        }
-        
-        boolean registered = false;
-        // TODO: finish this creating the account
-        try{
-            registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, null, LocalDate.now());
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        
-        if(registered) {
-            /*
+            boolean registered = false;
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
-                //Stage stage = new Stage();
-                BorderPane root = loader.load();
-
-                LogInController logInController = loader.<LogInController>getController();
-                logInController.initLogin(primaryStage);
-
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.setTitle("Log in");
+                registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, null, LocalDate.now());
             } catch (Exception e) {
                 System.err.println(e);
-            }*/
-            primaryStage.setScene(primaryScene);
-            primaryStage.setTitle(primaryTitle); 
+            }
+
+            if(registered) {
+                /*
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
+                    //Stage stage = new Stage();
+                    BorderPane root = loader.load();
+
+                    LogInController logInController = loader.<LogInController>getController();
+                    logInController.initLogin(primaryStage);
+
+                    Scene scene = new Scene(root);
+                    primaryStage.setScene(scene);
+                    primaryStage.setTitle("Log in");
+                } catch (Exception e) {
+                    System.err.println(e);
+                }*/
+                primaryStage.setScene(primaryScene);
+                primaryStage.setTitle(primaryTitle); 
+            }
         }
     }
     
