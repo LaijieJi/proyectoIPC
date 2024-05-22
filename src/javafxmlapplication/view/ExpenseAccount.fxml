@@ -61,6 +61,11 @@
    <top>
       <StackPane maxHeight="70.0" minHeight="60.0" prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly Report" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" text="◄">
@@ -72,11 +77,6 @@
                <StackPane.margin>
                   <Insets left="10.0" />
                </StackPane.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly Report" />
-               </children>
             </HBox>
          </children>
       </StackPane>

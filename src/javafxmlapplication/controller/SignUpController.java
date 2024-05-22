@@ -138,6 +138,8 @@ public class SignUpController implements Initializable {
 
     @FXML
     private void onCreateAccountButtonPressed(ActionEvent event) {
+        everythingOK = true;
+        
         passwordConfirmation = confirmPasswordField.getText();
         if(nameField.getText().isEmpty()) {
             nameLabel.setFill(Color.RED);
