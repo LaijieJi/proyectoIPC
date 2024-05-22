@@ -89,6 +89,7 @@ public class MainController implements Initializable {
     private void logoutAction(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Log out");
+        alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to log out?");
         
         Optional<ButtonType> result = alert.showAndWait();
