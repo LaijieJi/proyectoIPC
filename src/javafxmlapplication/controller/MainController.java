@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Acount;
@@ -115,6 +117,20 @@ public class MainController implements Initializable {
 
     @FXML
     private void onCompareExpensePressed(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ExpenseAccount.fxml"));
+            //Stage stage = new Stage();
+            BorderPane root = loader.load();
+            // TODO: Add controller and call the init method similar to
+            ExpenseAccountController expenseAccountController = loader.<ExpenseAccountController>getController();
+            expenseAccountController.initExpenseAccountPage(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Expense Account");
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
     }
     
 }

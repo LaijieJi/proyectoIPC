@@ -34,8 +34,8 @@
                      <children>
                         <MenuButton fx:id="compareOptions" mnemonicParsing="false" text="Compare with" GridPane.columnIndex="1">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Rest of the months of the year" />
-                            <MenuItem mnemonicParsing="false" text="Same month from last year" />
+                            <MenuItem fx:id="restOfYear" mnemonicParsing="false" onAction="#onRestOfYear" text="Rest of the year" />
+                            <MenuItem fx:id="sameMonth" mnemonicParsing="false" onAction="#onSameMonth" text="Same month from last year" />
                           </items>
                         </MenuButton>
                         <ChoiceBox fx:id="categorySelector" prefWidth="150.0" />
