@@ -40,6 +40,12 @@ public class ProfileSettingsController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
-    }    
+    }
+    
+    public void initProfileSettingsPage(Stage stage){
+        primaryStage = stage;
+        primaryScene = primaryStage.getScene();
+        primaryTitle = primaryStage.getTitle();
+    }
     
 }

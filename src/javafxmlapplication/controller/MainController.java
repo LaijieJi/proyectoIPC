@@ -41,8 +41,6 @@ public class MainController implements Initializable {
     @FXML
     private Button editButton;
     @FXML
-    private Button logoutButton;
-    @FXML
     private Button addButton;
     
     private Acount account;
@@ -62,6 +60,8 @@ public class MainController implements Initializable {
     private Button compareExpenseButton;
     @FXML
     private ListView<?> expenseList;
+    @FXML
+    private Button logOutButton;
 
     /**
      * Initializes the controller class.
@@ -85,12 +85,25 @@ public class MainController implements Initializable {
 
     @FXML
     private void editProfile(ActionEvent event) {
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ProfileSettings.fxml"));
+            BorderPane root = loader.load();
+            
+            ProfileSettingsController profSetController = loader.<ProfileSettingsController>getController();
+            profSetController.initProfileSettingsPage(primaryStage);
 
-    @FXML
-    private void logoutAction(ActionEvent event) {
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Profile Settings");
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
+    }
+   @FXML
+    private void onLogOutPressed(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Log out");
+        alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to log out?");
         
         Optional<ButtonType> result = alert.showAndWait();
@@ -108,11 +121,21 @@ public class MainController implements Initializable {
 
     @FXML
     private void onGenerateReportPressed(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Report.fxml"));
+            BorderPane root = loader.load();
+            
+            ReportController reportController = loader.<ReportController>getController();
+            reportController.initReportPage(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Generate Report");
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
     }
 
-    @FXML
-    private void onManagecategoryPressed(ActionEvent event) {
-    }
 
     @FXML
     private void onCompareExpensePressed(ActionEvent event) {
@@ -127,6 +150,23 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Expense Account");
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
+    }
+
+    @FXML
+    private void onManageCategoryPressed(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ManageCategories.fxml"));
+            BorderPane root = loader.load();
+            
+            ManageCategoriesController manageCategoriesController = loader.<ManageCategoriesController>getController();
+            manageCategoriesController.initManageCategoriesPage(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Manage categories");
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }
