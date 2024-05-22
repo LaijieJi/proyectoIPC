@@ -4,6 +4,8 @@
  */
 package javafxmlapplication.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,13 +20,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import model.Acount;
 import model.AcountDAOException;
 
@@ -43,6 +49,8 @@ public class SignUpController implements Initializable {
     private String passwordConfirmation;
     
     private Acount account;
+    
+    Image avatar = null;
     
     // variable used for checking all fields are correct
     boolean everythingOK = false;
@@ -205,7 +213,7 @@ public class SignUpController implements Initializable {
             System.out.println("everything ok");
             boolean registered = false;
             try{
-                registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, null, LocalDate.now());
+                registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, avatar, LocalDate.now());
             } catch (Exception e) {
                 System.err.println(e);
             }
@@ -244,6 +252,15 @@ public class SignUpController implements Initializable {
     @FXML
     private void onSelectImageButtonPressed(ActionEvent event) {
         // TODO: implement profile picture selection 
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        
+        if(selectedFile == null) {
+            return;
+        }
+        
+        avatar = new Image(selectedFile.toURI().toString());
+        profilePicture.imageProperty().setValue(avatar);
     }
 
     /**
@@ -281,6 +298,68 @@ public class SignUpController implements Initializable {
                 alphanumCharOnlyText.setFill(Color.RED);
                 everythingOK = false;
             }
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnName(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            surnameField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnSurname(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            emailField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnMail(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            usernameField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnUsername(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            passwordField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnPassword(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            confirmPasswordField.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnConfirmPassword(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            selectImageButton.requestFocus();
+        }
+    }
+
+    @FXML
+    private void onKeyPressedOnAccount(KeyEvent event) {
+        onCreateAccountButtonPressed(new ActionEvent());
+    }
+
+    @FXML
+    private void onKeyPressedOnImage(KeyEvent event) {
+        KeyCode code = event.getCode();
+        if(code != null && code.equals(KeyCode.ENTER)) {
+            onSelectImageButtonPressed(new ActionEvent());
+            createAccountButton.requestFocus();
         }
     }
 }
