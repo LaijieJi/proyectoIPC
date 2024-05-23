@@ -259,7 +259,7 @@ public class SignUpController implements Initializable {
             return;
         }
         
-        avatar = new Image(selectedFile.toURI().toString());
+        avatar = new Image(selectedFile.toURI().toString(), 200, 200, false, false);
         profilePicture.imageProperty().setValue(avatar);
     }
 
