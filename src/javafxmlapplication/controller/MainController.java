@@ -109,6 +109,22 @@ public class MainController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             System.out.println("Yes");
+            if(account.logOutUser()) {
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
+                    //Stage stage = new Stage();
+                    BorderPane root = loader.load();
+
+                    LogInController logInController = loader.<LogInController>getController();
+                    logInController.initLogin(primaryStage);
+
+                    Scene scene = new Scene(root);
+                    primaryStage.setScene(scene);
+                    primaryStage.setTitle("Log in");
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
         }else{
             System.out.println("No");
         }
