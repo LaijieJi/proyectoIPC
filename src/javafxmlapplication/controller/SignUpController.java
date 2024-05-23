@@ -253,8 +253,17 @@ public class SignUpController implements Initializable {
     private void onSelectImageButtonPressed(ActionEvent event) {
         // TODO: implement profile picture selection 
         FileChooser fileChooser = new FileChooser();
+		
+	//Selection extension filters (only images supported by ImageView natively)
+	fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("All Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.webp"),
+        new FileChooser.ExtensionFilter("JPG, JPEG", "*.jpg", "*.jpeg"),
+        new FileChooser.ExtensionFilter("PNG", "*.png"),
+        new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+        new FileChooser.ExtensionFilter("WEBP", "*.webp")
+        );
+		
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        
         if(selectedFile == null) {
             return;
         }
