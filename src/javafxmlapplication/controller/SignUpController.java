@@ -21,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -249,27 +251,29 @@ public class SignUpController implements Initializable {
         return true;
     }
 
-    @FXML
+@FXML
     private void onSelectImageButtonPressed(ActionEvent event) {
         // TODO: implement profile picture selection 
         FileChooser fileChooser = new FileChooser();
 		
-	//Selection extension filters (only images supported by ImageView natively)
-	fileChooser.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("All Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.webp"),
+		//Selection extension filters (only images supported by ImageView natively)
+		fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("All Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp"),
         new FileChooser.ExtensionFilter("JPG, JPEG", "*.jpg", "*.jpeg"),
         new FileChooser.ExtensionFilter("PNG", "*.png"),
-        new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-        new FileChooser.ExtensionFilter("WEBP", "*.webp")
-        );
+        new FileChooser.ExtensionFilter("BMP", "*.bmp")
+    );
 		
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        
         if(selectedFile == null) {
             return;
         }
         
-        avatar = new Image(selectedFile.toURI().toString());
-        profilePicture.imageProperty().setValue(avatar);
+        avatar = new Image(selectedFile.toURI().toString(), 200, 200, false, false);
+		
+	profilePicture.imageProperty().setValue(avatar);
+        
     }
 
     /**
