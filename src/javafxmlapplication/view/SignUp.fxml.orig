@@ -177,7 +177,11 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
                <image>
+<<<<<<< HEAD
+                  <Image url="@../../pedro-mapache.jpg" />
+=======
                   <Image url="@../styles/resources/Profile_avatar_placeholder_large.png" />
+>>>>>>> 7cc11ef89f694239c8488cce4b52410eb6ee1d23
                </image></ImageView>
             <Button fx:id="selectImageButton" mnemonicParsing="false" onAction="#onSelectImageButtonPressed" onKeyPressed="#onKeyPressedOnImage" text="Select an image" />
          </children>
