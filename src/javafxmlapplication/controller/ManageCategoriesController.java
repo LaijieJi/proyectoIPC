@@ -43,11 +43,11 @@ public class ManageCategoriesController implements Initializable {
     @FXML
     private Button backButton;
     @FXML
-    private Button newExpenseButton;
-    @FXML
-    private ListView<?> expenseList;
-    @FXML
     private Button deleteCategoryButton;
+    @FXML
+    private Button newCategoryButton;
+    @FXML
+    private ListView<?> categoryList;
 
     /**
      * Initializes the controller class.
@@ -78,12 +78,13 @@ public class ManageCategoriesController implements Initializable {
 
     @FXML
     private void onAddButtonPressed(ActionEvent event) throws IOException{
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/ModifyCategory.fxml"));
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/ModifyCategory.fxml"));
         AnchorPane root = (AnchorPane) myLoader.load();
-        if (expenseList.getSelectionModel().getSelectedIndex() != -1){
-        }
         
-        Scene scene = new Scene(root,400,400);
+        ModifyCategoryController modifyCategory = myLoader.getController();
+        modifyCategory.initFields(null,null);
+                
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Add category");
@@ -95,13 +96,12 @@ public class ManageCategoriesController implements Initializable {
     private void onDeleteCategoryButtonPressed(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Delete category");
+        alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this category?");
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
-            System.out.println("Yes");
-        }else{
-            System.out.println("No");
+            
         }
     }
     public class CategoryCell extends ListCell<Task>{
@@ -114,7 +114,7 @@ public class ManageCategoriesController implements Initializable {
         }
         
         private void loadFXML() throws IOException{
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("\view"));
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("..\view\"));
             //loader.setController(this);
             //loader.setRoot(this);
             //loader.load();

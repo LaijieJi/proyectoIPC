@@ -4,10 +4,17 @@
  */
 package javafxmlapplication.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +24,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
@@ -53,20 +62,32 @@ public class UpdateExpenseController implements Initializable {
     private TextField descriptionField;
     @FXML
     private Button addInvoiceButton;
+    @FXML
+    private Text invoiceText;
+    @FXML
+    private Text deleteInvoice;
+    
+    private Image invoice;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         try{
             account = Acount.getInstance();
+            List<Category> l = account.getUserCategories();
+            ObservableList<Category> categories = FXCollections.observableList(l);
+            categorySelection.setItems(categories);
+            dateSelection.setValue(LocalDate.now());
         } catch (AcountDAOException e) {
             System.err.println(e);
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        saveButton.disableProperty().bind(Bindings.or(
+                Bindings.or(nameField.textProperty().isEmpty(),costField.textProperty().isEmpty()),
+                Bindings.or(unitField.textProperty().isEmpty(),categorySelection.getSelectionModel().selectedItemProperty().isNull())));
     }    
 
     public void initUpdateExpense(Stage stage){
@@ -83,13 +104,12 @@ public class UpdateExpenseController implements Initializable {
 
     @FXML
     private void saveAction(ActionEvent event) {
-        Double cost = Double.parseDouble(costField.getText());
-        Integer units = Integer.parseInt(unitField.getText());
-        Image scanImage = null;
+        Double cost = Double.valueOf(costField.getText());
+        Integer units = Integer.valueOf(unitField.getText());
         LocalDate date = dateSelection.getValue();
-        Category category = null;
+        Category category = categorySelection.getValue();
         try{
-            account.registerCharge(nameField.getText(), descriptionField.getText(), cost, units, scanImage, date, category);
+            account.registerCharge(nameField.getText(), descriptionField.getText(), cost, units, invoice, date, category);
         }catch (AcountDAOException e){
             System.out.println(e);
         }
@@ -97,6 +117,13 @@ public class UpdateExpenseController implements Initializable {
 
     @FXML
     private void onAddInvoicePressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        
+        if(selectedFile == null) {
+            return;
+        }
+        invoice = new Image(selectedFile.toURI().toString());
     }
     
 }
