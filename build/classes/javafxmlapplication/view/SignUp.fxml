@@ -50,7 +50,7 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="nameField" onKeyPressed="#onKeyPressedOnName" prefHeight="26.0" prefWidth="201.0">
+                              <TextField fx:id="nameField" onKeyPressed="#onKeyPressedOnName" prefHeight="26.0" prefWidth="235.0">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
