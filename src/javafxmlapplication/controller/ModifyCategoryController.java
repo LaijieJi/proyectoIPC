@@ -7,6 +7,7 @@ package javafxmlapplication.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,6 +57,9 @@ public class ModifyCategoryController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        acceptButton.disableProperty().bind(nameText.textProperty().isEmpty());
+        
     }  
     
     public void initFields(String name, String description){
@@ -75,7 +79,8 @@ public class ModifyCategoryController implements Initializable {
     @FXML
     private void acceptAction(ActionEvent event) {
         try{
-            account.registerCategory(nameText.getText(), descriptionText.getText());
+            String name = colorPicker.getValue().toString() + "/" + nameText.getText();
+            account.registerCategory(name, descriptionText.getText());
         }catch (AcountDAOException e){
             System.err.println(e);
         }
