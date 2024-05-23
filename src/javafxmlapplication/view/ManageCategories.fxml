@@ -18,18 +18,18 @@
             <ListView fx:id="categoryList" prefHeight="200.0" prefWidth="600.0" />
             <VBox spacing="20.0">
                <children>
-                  <Button fx:id="newCategoryButton" mnemonicParsing="false" onAction="#onAddButtonPressed">
+                  <Button fx:id="newCategoryButton" mnemonicParsing="false" onAction="#onAddButtonPressed" prefHeight="57.0" prefWidth="59.0">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../styles/resources/plus.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="deleteCategoryButton" mnemonicParsing="false" onAction="#onDeleteCategoryButtonPressed">
+                  <Button fx:id="deleteCategoryButton" mnemonicParsing="false" onAction="#onDeleteCategoryButtonPressed" prefHeight="57.0" prefWidth="58.0">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="37.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../styles/resources/borrar.png" />
                            </image>
@@ -57,7 +57,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" text="◄">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>

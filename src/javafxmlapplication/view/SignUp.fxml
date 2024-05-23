@@ -201,7 +201,7 @@
                   <Font size="48.0" />
                </font>
             </Text>
-            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" text="◄">
+            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
                <font>
                   <Font size="15.0" />
                </font></Button>

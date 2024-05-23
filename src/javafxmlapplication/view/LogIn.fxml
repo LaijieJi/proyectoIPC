@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
@@ -30,7 +30,7 @@
                                     <Insets bottom="5.0" left="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" onKeyTyped="#onTextTyped" prefHeight="26.0" prefWidth="400.0" promptText="Nickname" />
+                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" onKeyTyped="#onTextTyped" prefHeight="26.0" prefWidth="408.0" promptText="Nickname" />
                               <Label fx:id="nickNameErrorText" styleClass="errorText" />
                            </children>
                         </VBox>
@@ -45,10 +45,10 @@
                                                 <Insets bottom="5.0" left="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" prefHeight="26.0" prefWidth="400.0" promptText="Password" />
+                                          <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" prefHeight="26.0" prefWidth="418.0" promptText="Password" />
                                        </children>
                                     </VBox>
-                                    <Button fx:id="seePasswordButton" mnemonicParsing="false" text="👁" />
+                                    <Button fx:id="seePasswordButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="👁" />
                                  </children>
                               </HBox>
                               <Label fx:id="passwordErrorText" styleClass="errorText" />

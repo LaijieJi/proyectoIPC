@@ -22,7 +22,7 @@
       </Text>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="530.0" prefWidth="192.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="530.0" prefWidth="194.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="110.0" prefWidth="134.0">
               <columnConstraints>
@@ -30,8 +30,8 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="80.60000457763672" minHeight="10.0" prefHeight="80.60000457763672" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="56.59999694824218" minHeight="10.0" prefHeight="42.19999542236327" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.60000457763672" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="56.59999694824218" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
@@ -48,7 +48,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editProfile" text="✎" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editProfile" prefHeight="30.0" prefWidth="40.0" text="✎" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <ImageView fx:id="profilePicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
@@ -76,7 +76,7 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addButton" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#addExpense" text="+">
+            <Button fx:id="addButton" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#addExpense" prefHeight="30.0" prefWidth="578.0" text="+">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -100,7 +100,7 @@
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutPressed" text="←]" BorderPane.alignment="CENTER_LEFT">
+      <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutPressed" prefHeight="30.0" prefWidth="40.0" text="←]" BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" />
          </BorderPane.margin>

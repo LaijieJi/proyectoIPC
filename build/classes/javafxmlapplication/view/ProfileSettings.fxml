@@ -208,7 +208,7 @@
                   <Font size="48.0" />
                </font>
             </Text>
-            <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" text="◄" />
+            <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="◄" />
             <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.05078125" />
          </children>
       </AnchorPane>
