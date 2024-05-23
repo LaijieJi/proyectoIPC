@@ -31,6 +31,7 @@ import javafx.util.StringConverter;
 import model.Acount;
 import model.AcountDAOException;
 import model.Category;
+import model.Charge;
 
 /**
  * FXML Controller class
@@ -39,8 +40,10 @@ import model.Category;
  */
 public class ExpenseAccountController implements Initializable {
     
-    List<Category> catList = null;
+    List<Category> categoryList = null;
     ObservableList<Category> observableCatList = null;
+    List<Charge> chargeList = null;
+    ObservableList<Charge> observableChargeList = null;
     
     private Stage primaryStage;
     private Scene primaryScene;
@@ -55,7 +58,7 @@ public class ExpenseAccountController implements Initializable {
     @FXML
     private ChoiceBox<Category> categorySelector;
     @FXML
-    private ListView<?> expenseList;
+    private ListView<Charge> expenseList;
     @FXML
     private MenuItem restOfYear;
     @FXML
@@ -75,12 +78,14 @@ public class ExpenseAccountController implements Initializable {
         }
         
         try{
-            catList = account.getUserCategories();    
+            categoryList = account.getUserCategories();   
+            chargeList = account.getUserCharges();
         } catch (Exception e) {
             System.err.println(e);
         }
         
-        observableCatList = FXCollections.observableList(catList);
+        observableCatList = FXCollections.observableList(categoryList);
+        observableChargeList = FXCollections.observableList(chargeList);
         categorySelector.selectionModelProperty().addListener((ob, oldVal, newVal) -> {
             
             // TODO: Filter by Category
@@ -88,6 +93,8 @@ public class ExpenseAccountController implements Initializable {
         categorySelector.getSelectionModel().getSelectedItem();
         
         categorySelector.setItems(observableCatList);
+        expenseList.setItems(observableChargeList);
+        expenseList.setCellFactory(param -> new ExpenseCardListCell());
         
         categorySelector.setConverter(new StringConverter<Category>() {
             @Override
