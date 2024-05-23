@@ -6,8 +6,12 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
+import model.Charge;
 
 /**
  * FXML Controller class
@@ -37,6 +42,9 @@ public class MainController implements Initializable {
     private Scene primaryScene;
     
     private String primaryTitle;
+    
+    List<Charge> dataList;
+    ObservableList<Charge> observableDataList;
 
     @FXML
     private Button editButton;
@@ -59,7 +67,7 @@ public class MainController implements Initializable {
     @FXML
     private Button compareExpenseButton;
     @FXML
-    private ListView<?> expenseList;
+    private ListView<Charge> expenseList;
     @FXML
     private Button logOutButton;
 
@@ -75,6 +83,12 @@ public class MainController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        dataList = new ArrayList<>();
+        observableDataList = FXCollections.observableList(dataList);
+        
+        expenseList.setCellFactory(param -> new ExpenseCardController());
+        
     }    
     
     public void initMain(Stage stage) {
