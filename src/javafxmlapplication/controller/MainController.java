@@ -158,7 +158,19 @@ public class MainController implements Initializable {
 
     @FXML
     private void addExpense(ActionEvent event) {
-        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/UpdateExpense.fxml"));
+            BorderPane root = loader.load();
+            
+            UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
+            updateExpenseController.initUpdateExpense(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Add Expense");
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
     }
 
     @FXML
