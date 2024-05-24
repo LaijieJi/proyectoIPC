@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ProfileSettingsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ProfileSettingsController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -49,7 +49,7 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField prefHeight="26.0" prefWidth="235.0" promptText="Set name to...">
+                              <TextField fx:id="nametextField" prefHeight="26.0" prefWidth="235.0">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
@@ -69,7 +69,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField promptText="Set surname to...">
+                        <TextField fx:id="surnameTextField" promptText="Set surname to...">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
@@ -85,7 +85,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField promptText="Set e-mail to...">
+                        <TextField fx:id="mailTextField" promptText="Set e-mail to...">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
