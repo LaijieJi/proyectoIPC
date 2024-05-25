@@ -6,8 +6,14 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,10 +28,12 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
+import model.Category;
 
 /**
  * FXML Controller class
@@ -47,7 +55,10 @@ public class ManageCategoriesController implements Initializable {
     @FXML
     private Button newCategoryButton;
     @FXML
-    private ListView<?> categoryList;
+    private ListView<Category> categoryList;
+    
+    List<Category> categories;
+    ObservableList<Category> list;
 
     /**
      * Initializes the controller class.
@@ -56,11 +67,21 @@ public class ManageCategoriesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try{
             account = Acount.getInstance();
+            categories = account.getUserCategories();
         } catch (AcountDAOException e) {
             System.err.println(e);
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        list = FXCollections.observableList(categories);
+        
+        categoryList.setItems(list);
+        
+        categoryList.setCellFactory(param -> new CategoryCardListCell());
+        
+        deleteCategoryButton.disableProperty().bind(
+                categoryList.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
     }    
 
     public void initManageCategoriesPage(Stage stage){
@@ -78,18 +99,25 @@ public class ManageCategoriesController implements Initializable {
 
     @FXML
     private void onAddButtonPressed(ActionEvent event) throws IOException{
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("../view/ModifyCategory.fxml"));
-        AnchorPane root = (AnchorPane) myLoader.load();
-        
-        ModifyCategoryController modifyCategory = myLoader.getController();
-        modifyCategory.initFields(null,null);
-                
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Add category");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ModifyCategory.fxml"));
+            AnchorPane root = loader.load();
+            
+            ModifyCategoryController modifyCategories = loader.<ModifyCategoryController>getController();
+            modifyCategories.initFields(null,null);
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Modify category");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+            categoryList.refresh();
+            categoryList.getSelectionModel().selectLast();
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
     }
 
     @FXML
@@ -101,33 +129,13 @@ public class ManageCategoriesController implements Initializable {
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
-            
-        }
-    }
-    public class CategoryCell extends ListCell<Task>{
-        public CategoryCell(){
-            try{
-                loadFXML();
-            }catch (IOException e){
-                throw new RuntimeException(e);
-            }
-        }
-        
-        private void loadFXML() throws IOException{
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("..\view\"));
-            //loader.setController(this);
-            //loader.setRoot(this);
-            //loader.load();
-        }
-        
-        @Override
-        protected void updateItem(Task item, boolean empty){
-            super.updateItem(item, empty);
-            if (empty || item == null) {
-                setText(null);
-                setContentDisplay(ContentDisplay.TEXT_ONLY);
-            }else{
-                //set
+            try {
+                Category c = categoryList.getSelectionModel().getSelectedItem();
+                account.removeCategory(c);
+                list.remove(c);
+                categoryList.getSelectionModel().clearSelection();
+            } catch (AcountDAOException ex) {
+                System.err.println(ex);
             }
         }
     }
