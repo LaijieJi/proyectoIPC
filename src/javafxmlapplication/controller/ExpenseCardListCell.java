@@ -1,6 +1,7 @@
 package javafxmlapplication.controller;
 
 import java.io.IOException;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
@@ -11,6 +12,12 @@ public class ExpenseCardListCell extends ListCell<Charge> {
     private FXMLLoader loader;
     private ExpenseCardController controller;
     private HBox cell;
+    
+    private ObservableList<Charge> observableList;
+
+    public ExpenseCardListCell(ObservableList<Charge> observableList) {
+        this.observableList = observableList;
+    }
 
     @Override
     protected void updateItem(Charge item, boolean empty) {
@@ -29,7 +36,9 @@ public class ExpenseCardListCell extends ListCell<Charge> {
                     e.printStackTrace();
                 }
             }
-
+            controller.setDeleteAction(() -> {
+                observableList.remove(item);
+            });
             controller.setCharge(item);
             setText(null);
             setGraphic(cell);

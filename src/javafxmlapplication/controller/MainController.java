@@ -95,11 +95,11 @@ public class MainController implements Initializable {
             System.err.println(e);
         }
         
-        observableDataList = FXCollections.observableList(dataList);
+        observableDataList = FXCollections.observableArrayList(dataList);
         
         expenseList.setItems(observableDataList);
         
-        expenseList.setCellFactory(param -> new ExpenseCardListCell());
+        expenseList.setCellFactory(param -> new ExpenseCardListCell(observableDataList));
         
     }    
     

@@ -38,7 +38,16 @@
                             <MenuItem fx:id="sameMonth" mnemonicParsing="false" onAction="#onSameMonth" text="Same month from last year" />
                           </items>
                         </MenuButton>
-                        <ChoiceBox fx:id="categorySelector" prefWidth="150.0" />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ChoiceBox fx:id="categorySelector" prefWidth="150.0" />
+                              <Button fx:id="clearButton" mnemonicParsing="false" onAction="#removeFilter" text="Clear">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>
