@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -48,6 +50,7 @@ public class ReportController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        locationField.setPromptText("Write here a name for the report");
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
@@ -55,6 +58,7 @@ public class ReportController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        saveButton.disableProperty().bind(locationField.textProperty().isEmpty());
     }    
     
     public void initReportPage(Stage stage){
@@ -70,33 +74,37 @@ public class ReportController implements Initializable {
         primaryStage.show();
     }
 
-    @FXML
-    private void onSelectLocationButtonPressed(ActionEvent event) {
-        
-    }
+    
 
     @FXML
     private void onSaveReportButtonPressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Save File");
-            fileChooser.setInitialFileName("report.txt"); // Specify default file name if needed
-            File file = fileChooser.showSaveDialog(primaryStage);
-            if (file != null) {
-                try {
-                    // Create content for the file (for demonstration, let's just write some text)
-                    String content = "Best novel ever -> Ruiz Zafón, C. (2001). La Sombra del Viento.";
+        fileChooser.setTitle("Save File");
+        fileChooser.setInitialFileName(locationField.getText() + ".txt"); // Specify default file name if needed
+        File file = fileChooser.showSaveDialog(primaryStage);
+        if (file != null) {
+            try {
+                // Create content for the file (for demonstration, let's just write some text)
+                String content = "your expenses";
 
-                    // Write content to the file
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                        writer.write(content);
-                    }
-
-                    System.out.println("File saved to: " + file.getAbsolutePath());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    // Handle exception (e.g., show error message)
+                // Write content to the file
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write(content);
                 }
+
+                System.out.println("File saved to: " + file.getAbsolutePath());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Handle exception (e.g., show error message)
             }
+        }
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Saved report");
+        alert.setHeaderText(null);
+        alert.setContentText("Your report has been saved");
+        alert.showAndWait();
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
     }
-    
 }

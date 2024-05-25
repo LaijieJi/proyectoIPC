@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="620.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.UpdateExpenseController">
+<BorderPane prefHeight="620.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.UpdateExpenseController">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -80,13 +80,13 @@
                      </HBox.margin>
                   </Button>
                   <Text fx:id="invoiceText" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Text fx:id="deleteInvoice" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fx:id="deleteInvoice" onDragDetected="#deleteInvoiceAction" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" />
                   <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveAction" prefHeight="25.0" prefWidth="52.0" text="Save" />
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" />
                </children>
             </HBox>
          </children>
@@ -95,15 +95,6 @@
    <top>
       <StackPane prefHeight="81.0" prefWidth="930.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="71.0" prefWidth="930.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="◄">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="98.0" prefWidth="930.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update expenses" />

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,12 +25,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
 import model.Category;
+import model.Charge;
 
 /**
  * FXML Controller class
@@ -55,7 +58,7 @@ public class UpdateExpenseController implements Initializable {
     @FXML
     private TextField unitField;
     @FXML
-    private ComboBox<Category> categorySelection;
+    private ComboBox<String> categorySelection;
     @FXML
     private DatePicker dateSelection;
     @FXML
@@ -68,7 +71,9 @@ public class UpdateExpenseController implements Initializable {
     private Text deleteInvoice;
     
     private Image invoice;
-
+    
+    List<Category> categories;
+    
     /**
      * Initializes the controller class.
      */
@@ -76,10 +81,10 @@ public class UpdateExpenseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try{
             account = Acount.getInstance();
-            List<Category> l = account.getUserCategories();
-            ObservableList<Category> categories = FXCollections.observableList(l);
-            categorySelection.setItems(categories);
-            dateSelection.setValue(LocalDate.now());
+            categories = account.getUserCategories();
+            List<String> l = categories.stream().map(Category::getName).collect(Collectors.toList());
+            ObservableList<String> categoriesl = FXCollections.observableList(l);
+            categorySelection.setItems(categoriesl);
         } catch (AcountDAOException e) {
             System.err.println(e);
         } catch (IOException ioe) {
@@ -94,12 +99,28 @@ public class UpdateExpenseController implements Initializable {
         primaryStage = stage;
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
+        nameField.setPromptText("Write a name for the expense here");
+        costField.setText("0.0");
+        unitField.setText("1");
+        descriptionField.setPromptText("Write a description for the expense here");
+        categorySelection.getSelectionModel().clearSelection();
+        dateSelection.setValue(LocalDate.now());
+    }
+    
+    public void initExpense(Charge charge){
+        nameField.setText(charge.getName());
+        costField.setText(Double.toString(charge.getCost()));
+        unitField.setText(Integer.toString(charge.getUnits()));
+        descriptionField.setText(charge.getDescription());
+        categorySelection.setValue(charge.getCategory().getName());
+        dateSelection.setValue(charge.getDate());
     }
     
     @FXML
     private void cancelAction(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
     }
 
     @FXML
@@ -107,23 +128,33 @@ public class UpdateExpenseController implements Initializable {
         Double cost = Double.valueOf(costField.getText());
         Integer units = Integer.valueOf(unitField.getText());
         LocalDate date = dateSelection.getValue();
-        Category category = categorySelection.getValue();
+        Category category = categories.get(categorySelection.getSelectionModel().getSelectedIndex());
         try{
             account.registerCharge(nameField.getText(), descriptionField.getText(), cost, units, invoice, date, category);
         }catch (AcountDAOException e){
             System.out.println(e);
         }
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
     }
 
     @FXML
     private void onAddInvoicePressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        
         if(selectedFile == null) {
             return;
         }
         invoice = new Image(selectedFile.toURI().toString());
+        invoiceText.textProperty().setValue(selectedFile.getName());
+        deleteInvoice.textProperty().setValue(" Delete");
     }
-    
+
+    @FXML
+    private void deleteInvoiceAction(MouseEvent event) {
+        invoice = null;
+        invoiceText.setText("");
+        deleteInvoice.setText("");
+    }
 }

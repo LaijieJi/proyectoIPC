@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -47,7 +47,6 @@
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="20.0">
                <children>
                   <TextField fx:id="locationField" promptText="Write location where to save the file" />
-                  <Button fx:id="selectLocationButton" mnemonicParsing="false" onAction="#onSelectLocationButtonPressed" prefHeight="30.0" prefWidth="300.0" text="Select a location" />
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveReportButtonPressed" text="Save report" />

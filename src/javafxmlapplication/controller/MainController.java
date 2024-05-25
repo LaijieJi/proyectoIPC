@@ -105,6 +105,8 @@ public class MainController implements Initializable {
         
         expenseList.setCellFactory(param -> new ExpenseCardListCell());
         
+        expenseList.refresh();
+        
     }    
     
     public void initMain(Stage stage) {

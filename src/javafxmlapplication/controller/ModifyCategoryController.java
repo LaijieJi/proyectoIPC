@@ -7,6 +7,8 @@ package javafxmlapplication.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
@@ -44,6 +47,8 @@ public class ModifyCategoryController implements Initializable {
     private Scene primaryScene;
     private String primaryTitle;
     
+    private boolean newC = false;
+    
     /**
      * Initializes the controller class.
      */
@@ -65,7 +70,9 @@ public class ModifyCategoryController implements Initializable {
     public void initFields(String name, String description){
         if (name != null && description != null){
             nameText.setText(name);
-            descriptionText.setText(description);
+            String s [] = description.split("/");
+            if (s.length > 1) descriptionText.setText(s[1]);
+            else descriptionText.setPromptText("Write here a description for the category");
         }else{
             if (name == null){
                 nameText.setPromptText("Write here a name for the category");
@@ -75,23 +82,28 @@ public class ModifyCategoryController implements Initializable {
             }
         }
     }
-
+    
+    public void initModifyCategoriesPage(Stage stage){
+        primaryStage = stage;
+        primaryScene = primaryStage.getScene();
+        primaryTitle = primaryStage.getTitle();
+    }
+    
     @FXML
     private void acceptAction(ActionEvent event) {
-        try{
-            String name = colorPicker.getValue().toString() + "/" + nameText.getText();
-            account.registerCategory(name, descriptionText.getText());
-        }catch (AcountDAOException e){
-            System.err.println(e);
+        try {
+            account.registerCategory(nameText.getText(), colorPicker.getValue().toString() + "/" + descriptionText.getText());
+        } catch (AcountDAOException ex) {
+            System.err.println(ex);
         }
         nameText.clear(); descriptionText.clear();
-        nameText.getScene().getWindow().hide();
+        acceptButton.getScene().getWindow().hide();
     }
 
     @FXML
     private void cancelAction(ActionEvent event) {
         nameText.clear(); descriptionText.clear();
-        nameText.getScene().getWindow().hide();
+        cancelButton.getScene().getWindow().hide();
     }
     
 }
