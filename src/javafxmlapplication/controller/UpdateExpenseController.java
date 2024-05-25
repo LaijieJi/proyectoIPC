@@ -73,9 +73,7 @@ public class UpdateExpenseController implements Initializable {
     private Image invoice;
     
     List<Category> categories;
-    @FXML
-    private Button backButton;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -122,6 +120,7 @@ public class UpdateExpenseController implements Initializable {
     private void cancelAction(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
     }
 
     @FXML
@@ -135,6 +134,9 @@ public class UpdateExpenseController implements Initializable {
         }catch (AcountDAOException e){
             System.out.println(e);
         }
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
+        primaryStage.show();
     }
 
     @FXML
@@ -152,13 +154,7 @@ public class UpdateExpenseController implements Initializable {
     @FXML
     private void deleteInvoiceAction(MouseEvent event) {
         invoice = null;
+        invoiceText.setText("");
+        deleteInvoice.setText("");
     }
-
-    @FXML
-    private void onBackButtonPressed(ActionEvent event) {
-        primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle);
-        primaryStage.show();
-    }
-    
 }

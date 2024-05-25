@@ -95,15 +95,6 @@
    <top>
       <StackPane prefHeight="81.0" prefWidth="930.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="71.0" prefWidth="930.0">
-               <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="98.0" prefWidth="930.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update expenses" />
