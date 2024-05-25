@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="cell" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.CategoryCardController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" prefWidth="100.0">
+         <children>
+            <Circle fx:id="colorCircle" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </VBox>
+      <VBox prefHeight="119.0" prefWidth="502.0" spacing="20.0">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+         <children>
+            <Label fx:id="title" text="Title">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="description" text="Description" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

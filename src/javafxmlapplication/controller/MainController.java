@@ -32,6 +32,7 @@ import model.Acount;
 import model.AcountDAOException;
 import model.Category;
 import model.Charge;
+import model.User;
 
 /**
  * FXML Controller class
@@ -41,10 +42,11 @@ import model.Charge;
 public class MainController implements Initializable {
     
     private Stage primaryStage;
-    
     private Scene primaryScene;
-    
     private String primaryTitle;
+        
+    private Acount account;
+    private User user;
     
     List<Charge> dataList;
     List<Category> categoryList;
@@ -54,8 +56,8 @@ public class MainController implements Initializable {
     private Button editButton;
     @FXML
     private Button addButton;
+
     
-    private Acount account;
     @FXML
     private Text nameLabel;
     @FXML
@@ -82,6 +84,8 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try{
             account = Acount.getInstance();
+            user = account.getLoggedUser();
+            System.out.println(user.getName());
         } catch (AcountDAOException e) {
             System.err.println(e);
         } catch (IOException ioe) {
@@ -101,12 +105,19 @@ public class MainController implements Initializable {
         
         expenseList.setCellFactory(param -> new ExpenseCardListCell(observableDataList));
         
+        expenseList.refresh();
+        
     }    
     
     public void initMain(Stage stage) {
         primaryStage = stage;
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
+        
+        usernameLabel.setText(user.getNickName());
+        nameLabel.setText(user.getSurname() + ", " + user.getName());
+        mailLabel.setText(user.getEmail());
+        profilePicture.setImage(user.getImage());
     }
 
     @FXML
