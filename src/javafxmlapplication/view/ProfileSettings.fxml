@@ -23,24 +23,25 @@
             <Insets left="80.0" right="10.0" />
          </BorderPane.margin>
          <children>
-            <GridPane alignment="TOP_CENTER" prefHeight="374.0" prefWidth="505.0">
+            <GridPane alignment="TOP_CENTER" prefHeight="412.0" prefWidth="502.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.1999969482422" minWidth="10.0" prefWidth="243.799951171875" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="209.400048828125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.1999969482422" minWidth="10.0" prefWidth="232.80001220703124" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="221.59998779296876" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.20001220703125" minWidth="0.0" prefWidth="50.40003662109376" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="78.59998168945313" minHeight="10.0" prefHeight="56.60001220703125" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="86.20000610351563" minHeight="10.0" prefHeight="69.2000061035156" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="139.39998779296872" minHeight="10.0" prefHeight="73.79998779296875" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="103.4" minHeight="10.0" prefHeight="21.600003051757824" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="128.99999389648437" minHeight="10.0" prefHeight="74.39997558593748" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="144.79998779296872" minHeight="10.0" prefHeight="74.4000244140625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="78.59998168945313" minHeight="10.0" prefHeight="59.00001220703125" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="78.59998168945313" minHeight="10.0" prefHeight="22.999987792968753" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="86.20000610351563" minHeight="10.0" prefHeight="51.79997558593752" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="139.39998779296872" minHeight="10.0" prefHeight="64.79998168945312" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.4" minHeight="10.0" prefHeight="22.40001831054687" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="128.99999389648437" minHeight="10.0" prefHeight="69.99998779296874" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="144.79998779296872" minHeight="10.0" prefHeight="84.40001220703124" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎Name">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                            <VBox.margin>
                               <Insets bottom="2.0" />
                            </VBox.margin>
@@ -49,7 +50,7 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="nametextField" prefHeight="26.0" prefWidth="235.0">
+                              <TextField fx:id="nametextField" prefHeight="26.0" prefWidth="222.0">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
@@ -60,38 +61,38 @@
                         <Insets />
                      </GridPane.margin>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <VBox prefHeight="200.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎Surname">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Surname">
                            <VBox.margin>
                               <Insets bottom="2.0" />
                            </VBox.margin>
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField fx:id="surnameTextField" promptText="Set surname to...">
+                        <TextField fx:id="surnameTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="222.0">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎E-mail">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail">
                            <VBox.margin>
                               <Insets bottom="2.0" />
                            </VBox.margin>
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField fx:id="mailTextField" promptText="Set e-mail to...">
+                        <TextField fx:id="mailTextField">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="504.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                  <VBox prefHeight="200.0" prefWidth="504.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password">
                            <VBox.margin>
@@ -102,7 +103,7 @@
                            </font></Text>
                         <HBox>
                            <children>
-                              <PasswordField prefWidth="454.0" />
+                              <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="454.0" />
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
@@ -112,9 +113,9 @@
                         <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong password, try again" />
                      </children>
                   </VBox>
-                  <VBox GridPane.columnSpan="2" GridPane.rowIndex="3">
+                  <VBox GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎Password">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎Change Password">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -122,7 +123,7 @@
                         <Separator prefWidth="200.0" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="472.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                  <VBox prefHeight="200.0" prefWidth="472.0" GridPane.columnSpan="3" GridPane.rowIndex="6">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Password">
                            <VBox.margin>
@@ -134,7 +135,7 @@
                         </Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <PasswordField prefHeight="26.0" prefWidth="454.0" promptText="Set password to...">
+                              <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="454.0" promptText="Set password to...">
                                  <HBox.margin>
                                     <Insets bottom="4.0" />
                                  </HBox.margin>
@@ -148,22 +149,27 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <PasswordField prefHeight="26.0" prefWidth="454.0" promptText="Enter new password again..." />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="👁">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="454.0" promptText="Enter new password again..." />
                            </children>
                         </HBox>
                         <Text fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" text="The passwords don't match" />
                      </children>
                   </VBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="(Username)">
+                  <Text fx:id="usernameText" strokeType="OUTSIDE" strokeWidth="0.0" text="(Username)">
                      <font>
                         <Font name="System Bold Italic" size="18.0" />
                      </font>
                   </Text>
+                  <VBox GridPane.columnSpan="2" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="✎Personal data">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Separator prefWidth="200.0" />
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="15.0" />
@@ -182,11 +188,11 @@
                <font>
                   <Font size="14.0" />
                </font></Text>
-            <ImageView fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePicture" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin></ImageView>
-            <Button mnemonicParsing="false" text="Select picture" />
+            <Button fx:id="selectImageButton" mnemonicParsing="false" onAction="#onSelectImageButtonPressed" text="Select picture" />
          </children>
          <BorderPane.margin>
             <Insets left="20.0" right="70.0" top="30.0" />
@@ -208,7 +214,7 @@
                   <Font size="48.0" />
                </font>
             </Text>
-            <Button layoutX="21.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="◄" />
+            <Button fx:id="goBackButton" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGoBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" />
             <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.05078125" />
          </children>
       </AnchorPane>

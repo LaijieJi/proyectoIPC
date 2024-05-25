@@ -49,10 +49,10 @@ public class SignUpController implements Initializable {
     
     private String password;
     private String passwordConfirmation;
+    private String username;
     
     private Acount account;
-    
-    Image avatar = null;
+    private Image avatar = null;
     
     // variable used for checking all fields are correct
     boolean everythingOK = false;
@@ -67,9 +67,6 @@ public class SignUpController implements Initializable {
     private TextField emailField;
     @FXML
     private TextField usernameField;
-    @FXML
-    private Text usernameMessageText;
-    
     @FXML
     private Button viewPasswordButton;
     @FXML
@@ -95,11 +92,11 @@ public class SignUpController implements Initializable {
     @FXML
     private Text passwordLabel;
     @FXML
-    private Text passwordLabel1;
-    @FXML
     private PasswordField confirmPasswordField;
     @FXML
     private Text confirmPasswordMessage;
+    @FXML
+    private Text usernameWarningText;
 
     /**
      * Initializes the controller class.
@@ -114,108 +111,111 @@ public class SignUpController implements Initializable {
             System.err.println(ioe);
         }
         
+        confirmPasswordField.setDisable(true);
+        
+        /***viewPasswordButton config***/
+        viewPasswordButton.setDisable(true);
         viewPasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             password = passwordField.getText();
+            //After saving the password in a var, it's removed so as to show it as a prompt 
             passwordField.clear();
             passwordField.setPromptText(password);
         });
         viewPasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
             passwordField.setText(password);
-            passwordField.setPromptText("Password");
+            passwordField.setPromptText("");
         });
         
-        sixCharLengthText.setText("→ At least 6 characters long");
+        /***Password-related & Username warnings initial config***/
+        sixCharLengthText.setText("→ More than 6 characters long");
         sixCharLengthText.setFill(Color.BLACK);
         alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
-        confirmPasswordMessage.setFill(Color.BLACK);
+        confirmPasswordMessage.setVisible(false);
+        usernameWarningText.setVisible(false);
     }    
     
-    public void initSignUp(Stage stage){
+    public void initSignUpPage(Stage stage){
         primaryStage = stage;
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
     }
-    
             
-
     @FXML
     private void onGobackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle); 
     }
 
-
     @FXML
     private void onCreateAccountButtonPressed(ActionEvent event) {
         everythingOK = true;
         
-        passwordConfirmation = confirmPasswordField.getText();
+        //1st: check Name
         if(nameField.getText().isEmpty()) {
-            nameLabel.setFill(Color.RED);
+            nameLabel.setFill(Color.INDIANRED);
             everythingOK &= false;
         } else {
             nameLabel.setFill(Color.BLACK);
         }
         
+        //2nd: check Surname
         if(surnameField.getText().isEmpty()) {
-            surnameLabel.setFill(Color.RED);
+            surnameLabel.setFill(Color.INDIANRED);
             everythingOK &= false; 
         } else {
             surnameLabel.setFill(Color.BLACK);
         }
         
-        if(usernameField.getText().isEmpty()) {
-            usernameLabel.setFill(Color.RED);
-            everythingOK &= false;
-        } else {
-            usernameLabel.setFill(Color.BLACK);
-        }
-        
+        //3rd: check Email
         if(emailField.getText().isEmpty()) {
-            mailLabel.setFill(Color.RED);
+            mailLabel.setFill(Color.INDIANRED);
             everythingOK &= false;
         } else {
             mailLabel.setFill(Color.BLACK);
         }
         
+        //4th: check Username
+        if(usernameField.getText().isEmpty()) {
+            usernameLabel.setFill(Color.INDIANRED);
+            everythingOK &= false;
+        } else if(account.existsLogin(usernameField.getText())) {
+                everythingOK &= false;
+                usernameLabel.setFill(Color.INDIANRED);
+                usernameWarningText.setText("Username not available, try another one");
+                usernameWarningText.setVisible(true);
+        } else {
+            usernameLabel.setFill(Color.BLACK);
+        }
+        
+        //5th: check Password & Password Confirmation
         password = passwordField.getText();
+        passwordConfirmation = confirmPasswordField.getText();
         
         if(password.isEmpty()) {
             everythingOK &= false;
-            passwordLabel.setFill(Color.RED);
+            passwordLabel.setFill(Color.INDIANRED);
         } else {
             passwordLabel.setFill(Color.BLACK);
         }
         
         if(passwordConfirmation.isEmpty()) {
             everythingOK &= false;
-            passwordLabel.setFill(Color.RED);
-        } else {
-            if(passwordConfirmation.equals(password)) {
-                confirmPasswordMessage.setFill(Color.GREEN);
-                confirmPasswordMessage.setText("🗸 Passwords match");
-            } else {
+            passwordLabel.setFill(Color.INDIANRED);
+        } else if(!passwordConfirmation.equals(password)) {
                 everythingOK &= false;
-                confirmPasswordMessage.setText("→ Passwords must match");
-                confirmPasswordMessage.setFill(Color.RED);
-            }
+                confirmPasswordMessage.setVisible(true);
+        } else {
             passwordLabel.setFill(Color.BLACK);
         }
         
-        if(account.existsLogin(usernameField.getText())) {
-            everythingOK &= false;
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error during account creation");
-            alert.setContentText("An account with this username already exists, try with another");
-            alert.showAndWait();
-        }
-        
+        //6th: register user
         if(everythingOK) {
             System.out.println("everything ok");
             boolean registered = false;
             try{
-                registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() , usernameField.getText() , password, avatar, LocalDate.now());
+                registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
+                        usernameField.getText() , password, profilePicture.getImage(), LocalDate.now());
             } catch (Exception e) {
                 System.err.println(e);
             }
@@ -242,6 +242,75 @@ public class SignUpController implements Initializable {
         }
     }
     
+    
+    /***ALL: Text input listeners (Password & Username's also check requisites)***/
+    @FXML
+    private void onNameWritten(KeyEvent event) {
+        nameLabel.setFill(Color.BLACK);
+    }
+
+    @FXML
+    private void onSurnameWritten(KeyEvent event) {
+        surnameLabel.setFill(Color.BLACK);
+    }
+
+    @FXML
+    private void onMailWritten(KeyEvent event) {
+        mailLabel.setFill(Color.BLACK);
+    }
+    
+    @FXML
+    private void onUsernameWritten(KeyEvent event) {
+        username = usernameField.getText();
+        usernameLabel.setFill(Color.BLACK);
+        //Char requisite
+        if(event.getCharacter().equals(" ") || username.contains(" ")) {
+            usernameWarningText.setText("Cannot contain blank spaces");
+            usernameWarningText.setVisible(true);
+        } else {
+            usernameWarningText.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onPasswordWritten(KeyEvent event) {
+        password = passwordField.getText();
+        passwordLabel.setFill(Color.BLACK);
+        confirmPasswordField.setDisable(true);
+        viewPasswordButton.setDisable(true);
+        boolean bothHold = true;
+        
+        if(password.isEmpty()) {
+            sixCharLengthText.setText("→ More than 6 characters long");
+            sixCharLengthText.setFill(Color.BLACK);
+            alphanumCharOnlyText.setText("→ Alphanumeric characters only");
+            alphanumCharOnlyText.setFill(Color.BLACK);
+        } else {
+            confirmPasswordMessage.setVisible(false);
+            viewPasswordButton.setDisable(false);
+            //Length requisite
+            if(password.length() > 6) {
+                sixCharLengthText.setText("🗸 More than 6 characters long");
+                sixCharLengthText.setFill(Color.FORESTGREEN);
+            } else {
+                sixCharLengthText.setText("→ More than 6 characters long");
+                sixCharLengthText.setFill(Color.RED);
+                bothHold &= false;
+            }
+            //Char requisite
+            if(isAlphanumeric(password)) {
+                alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
+                alphanumCharOnlyText.setFill(Color.FORESTGREEN);
+            } else {
+                alphanumCharOnlyText.setText("→ Alphanumeric characters only");
+                alphanumCharOnlyText.setFill(Color.RED);
+                bothHold &= false;
+            }
+            
+            if(bothHold) confirmPasswordField.setDisable(false);
+        }
+    }
+
     public boolean isAlphanumeric(String str) {
         for (int i=0; i<str.length(); i++) {
             char c = str.charAt(i);
@@ -250,68 +319,52 @@ public class SignUpController implements Initializable {
         }
         return true;
     }
-
-@FXML
+    
+    
+    /***ALL: Profile Picture selection***/
+    @FXML
     private void onSelectImageButtonPressed(ActionEvent event) {
-        // TODO: implement profile picture selection 
         FileChooser fileChooser = new FileChooser();
 		
-		//Selection extension filters (only images supported by ImageView natively)
-		fileChooser.getExtensionFilters().addAll(
+        //Selection extension filters (only images supported by ImageView natively)
+        fileChooser.getExtensionFilters().addAll(
         new FileChooser.ExtensionFilter("All Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp"),
         new FileChooser.ExtensionFilter("JPG, JPEG", "*.jpg", "*.jpeg"),
         new FileChooser.ExtensionFilter("PNG", "*.png"),
         new FileChooser.ExtensionFilter("BMP", "*.bmp")
-    );
+        );
 		
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
-        if(selectedFile == null) {
-            return;
-        }
+        if(selectedFile == null) return;
         
-        avatar = new Image(selectedFile.toURI().toString(), 200, 200, false, false);
-        profilePicture.imageProperty().setValue(avatar);
+        avatar = new Image(selectedFile.toURI().toString());
+        //The avatar gets cut to fit the ImageView squared shape
+        profilePicture.setImage(cropSquaredCenter(avatar)); 
+        
     }
+    
+    //To crop the given image into a centered square, if not square-shaped already
+    public static Image cropSquaredCenter(Image image) {
+        int imW = (int) image.getWidth();
+        int imH = (int) image.getHeight();
 
-    /**
-    *  Listens to the event in which something is written in the password field and
-    *  evaluates the different cases
-    **/
-    @FXML
-    private void onTextWritten(KeyEvent event) {
-        password = passwordField.getText();
-        
-        if(password.isEmpty()) {
-            passwordLabel.setFill(Color.BLACK);
-            sixCharLengthText.setText("→ At least 6 characters long");
-            sixCharLengthText.setFill(Color.BLACK);
-            alphanumCharOnlyText.setText("→ Alphanumeric characters only");
-            alphanumCharOnlyText.setFill(Color.BLACK);
-        } else {
-            passwordLabel.setFill(Color.BLACK);
-            if(password.length() < 6) {
-                sixCharLengthText.setText("→ At least 6 characters long");
-                sixCharLengthText.setFill(Color.RED);
-                everythingOK = false;
-            } else {
-                sixCharLengthText.setText("🗸 At least 6 characters long");
-                sixCharLengthText.setFill(Color.GREEN);
-                everythingOK = true;
-            }
+        if(imH == imW) return image; //Already a square
+        else {
+            int sideLength = Math.min(imW, imH);
+            int initX = (imW - sideLength) / 2;
+            int initY = (imH - sideLength) / 2;
+
+            //CROPPING (centered)
+            PixelReader reader = image.getPixelReader();
+            WritableImage croppedImage = new WritableImage(reader, initX, initY, sideLength, sideLength);
             
-            if(isAlphanumeric(password)) {
-                alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
-                alphanumCharOnlyText.setFill(Color.GREEN);
-                if(everythingOK) everythingOK = true;
-            } else {
-                alphanumCharOnlyText.setText("→ Alphanumeric characters only");
-                alphanumCharOnlyText.setFill(Color.RED);
-                everythingOK = false;
-            }
+            return croppedImage;
         }
     }
-
+    
+    
+    /***ALL: Window navigation via ENTER key***/
     @FXML
     private void onKeyPressedOnName(KeyEvent event) {
         KeyCode code = event.getCode();
@@ -373,4 +426,5 @@ public class SignUpController implements Initializable {
             createAccountButton.requestFocus();
         }
     }
+
 }
