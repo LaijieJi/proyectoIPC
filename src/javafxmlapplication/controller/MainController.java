@@ -136,7 +136,6 @@ public class MainController implements Initializable {
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
-            System.out.println("Yes");
             if(account.logOutUser()) {
                 try{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
@@ -153,8 +152,6 @@ public class MainController implements Initializable {
                     System.err.println(e);
                 }
             }
-        }else{
-            System.out.println("No");
         }
     }
 
@@ -173,6 +170,7 @@ public class MainController implements Initializable {
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }
+        expenseList.refresh();
     }
 
     @FXML
