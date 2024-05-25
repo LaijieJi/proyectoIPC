@@ -17,26 +17,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="80.0" right="10.0" />
          </BorderPane.margin>
          <children>
-            <GridPane alignment="TOP_CENTER" prefHeight="413.0" prefWidth="496.0">
+            <GridPane alignment="TOP_CENTER" prefHeight="413.0" prefWidth="498.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.1999969482422" minWidth="10.0" prefWidth="208.8" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="244.80000000000004" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.1999969482422" minWidth="10.0" prefWidth="224.8" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="229.6" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.20001220703125" minWidth="0.0" prefWidth="50.40003662109376" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="55.000003051757815" minHeight="10.0" prefHeight="53.39999694824219" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="78.59998168945313" minHeight="10.0" prefHeight="61.19999389648437" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="103.4" minHeight="10.0" prefHeight="85.20000610351562" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="144.79998779296872" minHeight="10.0" prefHeight="78.4" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="103.19999999999999" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="103.19999999999999" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="57.60001220703125" minHeight="10.0" prefHeight="52.799993896484374" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="87.2000015258789" minHeight="10.0" prefHeight="64.80000610351561" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="103.4" minHeight="3.199986267089841" prefHeight="78.19999389648437" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="163.20001373291015" minHeight="10.0" prefHeight="80.60000610351562" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="87.19999389648439" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="147.00003662109373" minHeight="10.0" prefHeight="47.20002441406251" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -50,7 +50,7 @@
                            </font></Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="nameField" onKeyPressed="#onKeyPressedOnName" prefHeight="26.0" prefWidth="201.0">
+                              <TextField fx:id="nameField" onKeyPressed="#onKeyPressedOnName" onKeyTyped="#onNameWritten" prefHeight="26.0" prefWidth="215.0">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
@@ -71,7 +71,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField fx:id="surnameField" onKeyPressed="#onKeyPressedOnSurname">
+                        <TextField fx:id="surnameField" onKeyPressed="#onKeyPressedOnSurname" onKeyTyped="#onSurnameWritten" prefHeight="26.0" prefWidth="215.0">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
@@ -87,7 +87,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Text>
-                        <TextField fx:id="emailField" onKeyPressed="#onKeyPressedOnMail">
+                        <TextField fx:id="emailField" onKeyPressed="#onKeyPressedOnMail" onKeyTyped="#onMailWritten" prefHeight="26.0" prefWidth="456.0">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin></TextField>
@@ -109,15 +109,15 @@
                            <font>
                               <Font size="10.0" />
                            </font></Text>
-                        <TextField fx:id="usernameField" onKeyPressed="#onKeyPressedOnUsername">
+                        <TextField fx:id="usernameField" onKeyPressed="#onKeyPressedOnUsername" onKeyTyped="#onUsernameWritten" prefHeight="26.0" prefWidth="456.0">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </TextField>
-                        <Text fx:id="usernameMessageText" fill="#a40000" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Text fx:id="usernameWarningText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Cannot contain blank spaces" visible="false" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="504.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+                  <VBox prefHeight="200.0" prefWidth="506.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
                      <children>
                         <Text fx:id="passwordLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Password *">
                            <VBox.margin>
@@ -125,36 +125,34 @@
                            </VBox.margin>
                            <font>
                               <Font size="14.0" />
-                           </font></Text>
+                           </font>
+                        </Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onTextWritten" prefHeight="26.0" prefWidth="460.0" />
+                              <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="456.0" />
                               <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
-                                 </HBox.margin></Button>
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Text fx:id="sixCharLengthText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
-                                    <Text fx:id="alphanumCharOnlyText" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
+                                    <Text fx:id="sixCharLengthText" fill="FORESTGREEN" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 At least 6 characters long" />
+                                    <Text fx:id="alphanumCharOnlyText" fill="GREEN" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Alphanumeric characters only" />
                                  </children>
                               </VBox>
-                           </children></StackPane>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
-                  <VBox fillWidth="false" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                  <VBox fillWidth="false" prefWidth="506.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
                      <children>
-                        <Text fx:id="passwordLabel1" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm password *">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                        <PasswordField fx:id="confirmPasswordField" onKeyPressed="#onKeyPressedOnConfirmPassword" onKeyTyped="#onTextWritten" prefHeight="26.0" prefWidth="460.0" />
-                        <Text fx:id="confirmPasswordMessage" fill="#00711e" strokeType="OUTSIDE" strokeWidth="0.0" text="🗸 Passwords match" />
+                        <PasswordField fx:id="confirmPasswordField" onKeyPressed="#onKeyPressedOnConfirmPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="456.0" promptText="Confirm password" />
+                        <Text fx:id="confirmPasswordMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="The passwords don't match" visible="false" />
                      </children>
                   </VBox>
                </children>
@@ -187,25 +185,25 @@
       </VBox>
    </center>
    <bottom>
-      <AnchorPane prefHeight="129.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="113.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="createAccountButton" layoutX="379.0" layoutY="37.99999999999999" mnemonicParsing="false" onAction="#onCreateAccountButtonPressed" onKeyPressed="#onKeyPressedOnAccount" prefHeight="33.0" prefWidth="168.0" text="CREATE ACCOUNT" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="375.0" />
          </children>
       </AnchorPane>
    </bottom>
    <top>
-      <AnchorPane prefHeight="99.0" prefWidth="922.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="85.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="371.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="370.4828125">
                <font>
                   <Font size="48.0" />
                </font>
             </Text>
-            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
+            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="17.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="14.05078125" />
+            <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="17.0" />
          </children>
       </AnchorPane>
    </top>

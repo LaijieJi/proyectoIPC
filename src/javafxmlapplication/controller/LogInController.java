@@ -135,7 +135,7 @@ public class LogInController implements Initializable {
         BorderPane root = loader.load();
         // TODO: Add controller and call the init method similar to
         SignUpController signUpController = loader.<SignUpController>getController();
-        signUpController.initSignUp(primaryStage);
+        signUpController.initSignUpPage(primaryStage);
         
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
