@@ -145,6 +145,7 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
         
+        /***loginButton config***/
         loginButton.setDisable(true);
         logInOK = 0;
         

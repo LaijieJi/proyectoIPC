@@ -449,14 +449,7 @@ public class SignUpController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
         if(selectedFile == null) {
-            Alert error = new Alert(AlertType.ERROR);
-            DialogPane dialogPane = error.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
-            error.getDialogPane().getStyleClass().add("alert");
-            error.setTitle("Exception Dialog");
-            error.setHeaderText(null);
-            error.setContentText("An error has occurred trying to open the file");
-            error.showAndWait();
+            return;
         }
         
         avatar = new Image(selectedFile.toURI().toString());
