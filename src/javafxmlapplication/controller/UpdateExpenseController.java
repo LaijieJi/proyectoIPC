@@ -350,8 +350,9 @@ public class UpdateExpenseController implements Initializable {
         }
         invoice = new Image(selectedFile.toURI().toString());
         invoiceText.textProperty().setValue(selectedFile.getName());
-        deleteInvoice.textProperty().setValue(" Delete");
+        deleteInvoice.textProperty().setValue(" Delete.");
         deleteInvoice.setFill(Color.BLUE);
+        deleteInvoice.setFocusTraversable(true);
     }
 
     @FXML

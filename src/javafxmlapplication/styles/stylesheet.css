@@ -98,3 +98,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-text-fill: red;
 }
 
+.label-delete{
+    -fx-text-fill: blue;
+    -fx-underline: true;
+}
+.label-delete:hover{
+    -fx-font-size: 13px;
+    -fx-weight: bold;
+}
+
