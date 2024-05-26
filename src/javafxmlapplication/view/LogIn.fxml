@@ -72,7 +72,7 @@
                                           <HBox alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="450.0" spacing="5.0">
                                              <children>
                                                 <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="400.0" />
-                                                <Button fx:id="seePasswordButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" text="👁">
+                                                <Button fx:id="seePasswordButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="👁">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin></Button>
@@ -85,7 +85,10 @@
                                     <Insets left="40.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Label fx:id="passwordErrorText" styleClass="errorText" />
+                              <Label fx:id="passwordErrorText" styleClass="errorText">
+                                 <VBox.margin>
+                                    <Insets left="40.0" />
+                                 </VBox.margin></Label>
                            </children>
                         </VBox>
                         <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonPressed" onKeyPressed="#onKeyPressedOnLogin" prefHeight="35.0" prefWidth="99.0" text="Log In">
