@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -94,6 +95,9 @@ public class MainController implements Initializable {
             user = account.getLoggedUser();
         } catch (AcountDAOException e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -123,6 +127,9 @@ public class MainController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -163,6 +170,9 @@ public class MainController implements Initializable {
             dataList = account.getUserCharges();
         } catch (Exception e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account's infromation");
@@ -224,14 +234,48 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Profile Settings");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
     
    @FXML
     private void onLogOutPressed(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("alert");
         alert.setTitle("Log out");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to log out?");
@@ -250,6 +294,7 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(root);
                     primaryStage.setScene(scene);
                     primaryStage.setTitle("Log in");
+                    primaryStage.setResizable(false);
                 } catch (Exception e) {
                     Alert error = new Alert(AlertType.ERROR);
                     error.setTitle("Exception Dialog");
@@ -308,6 +353,9 @@ public class MainController implements Initializable {
                 expenseList.setItems(observableDataList);
             } catch (Exception e) {
                 Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
                 error.setTitle("Exception Dialog");
                 error.setHeaderText(null);
                 error.setContentText("An error has occurred while adding the charge");
@@ -340,6 +388,9 @@ public class MainController implements Initializable {
             expenseList.getSelectionModel().selectLast();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -382,8 +433,12 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Generate Report");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -428,8 +483,12 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Expense Account");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -472,8 +531,12 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Manage categories");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -529,17 +592,80 @@ public class MainController implements Initializable {
                 observableDataList = FXCollections.observableArrayList(dataList);
                 expenseList.setItems(observableDataList);
             } catch (Exception e) {
-                System.err.println(e);
+                Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane1 = error.getDialogPane();
+                dialogPane1.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
+                error.setTitle("Exception Dialog");
+                error.setHeaderText(null);
+                error.setContentText("An error has occurred while trying to remove and expense");
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea,Priority.ALWAYS);
+                GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label, 0, 0);
+                expContent.add(textArea, 0 ,1);
+
+                error.getDialogPane().setExpandableContent(expContent);
+                error.showAndWait();
             }
             expenseList.refresh();
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 
     @FXML
     private void onDelete(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("alert");
         alert.setTitle("Delete charge");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this charge?");
@@ -551,7 +677,37 @@ public class MainController implements Initializable {
                 observableDataList.remove(expenseList.getSelectionModel().getSelectedItem());
                 expenseList.getSelectionModel().clearSelection();
             } catch (AcountDAOException ex) {
-                System.err.println(ex);
+                Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane1 = error.getDialogPane();
+                dialogPane1.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
+                error.setTitle("Exception Dialog");
+                error.setHeaderText(null);
+                error.setContentText("An error has occurred while trying to remove and expense");
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                ex.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea,Priority.ALWAYS);
+                GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label, 0, 0);
+                expContent.add(textArea, 0 ,1);
+
+                error.getDialogPane().setExpandableContent(expContent);
+                error.showAndWait();
             }
         }
     }

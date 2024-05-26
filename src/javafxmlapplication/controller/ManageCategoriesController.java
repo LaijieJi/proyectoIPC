@@ -27,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -77,6 +78,9 @@ public class ManageCategoriesController implements Initializable {
             categories = account.getUserCategories();
         } catch (AcountDAOException e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -106,6 +110,9 @@ public class ManageCategoriesController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -156,6 +163,7 @@ public class ManageCategoriesController implements Initializable {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
         primaryStage.show();
+        primaryStage.setResizable(true);
     }
 
     @FXML
@@ -181,6 +189,9 @@ public class ManageCategoriesController implements Initializable {
                 categoryList.setItems(list);
             } catch (Exception e) {
                 Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
                 error.setTitle("Exception Dialog");
                 error.setHeaderText(null);
                 error.setContentText("An error has occurred while adding the category");
@@ -214,6 +225,9 @@ public class ManageCategoriesController implements Initializable {
             categoryList.getSelectionModel().selectLast();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -247,6 +261,9 @@ public class ManageCategoriesController implements Initializable {
     @FXML
     private void onDeleteCategoryButtonPressed(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+        alert.getDialogPane().getStyleClass().add("alert");
         alert.setTitle("Delete category");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this category?");
@@ -260,6 +277,9 @@ public class ManageCategoriesController implements Initializable {
                 categoryList.getSelectionModel().clearSelection();
             } catch (AcountDAOException ex) {
                 Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane1 = error.getDialogPane();
+                dialogPane1.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
                 error.setTitle("Exception Dialog");
                 error.setHeaderText(null);
                 error.setContentText("An error has occurred while removing the category");

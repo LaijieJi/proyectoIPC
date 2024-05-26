@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -63,6 +64,8 @@ public class LogInController implements Initializable {
     private PasswordField passwordInput;
     @FXML
     private Button seePasswordButton;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -70,11 +73,13 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // testing credentials -> username: test, password: test123
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -104,6 +109,9 @@ public class LogInController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -185,6 +193,9 @@ public class LogInController implements Initializable {
             }
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Error trying to log in");
@@ -245,6 +256,7 @@ public class LogInController implements Initializable {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Page");
+        primaryStage.setResizable(true);
     }
 
     @FXML
@@ -268,7 +280,37 @@ public class LogInController implements Initializable {
         try{
             onLoginButtonPressed(new ActionEvent());
         } catch (Exception e) {
-            System.err.println(e);
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Error trying to log in");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 

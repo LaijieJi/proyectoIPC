@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -84,6 +85,9 @@ public class ExpenseAccountController implements Initializable {
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -113,6 +117,9 @@ public class ExpenseAccountController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -147,6 +154,9 @@ public class ExpenseAccountController implements Initializable {
             chargeList = account.getUserCharges();
         } catch (Exception e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account's information");
@@ -204,33 +214,36 @@ public class ExpenseAccountController implements Initializable {
                 expenseList.setItems(observableChargeList);
             } catch (Exception e) {
                 Alert error = new Alert(AlertType.ERROR);
-            error.setTitle("Exception Dialog");
-            error.setHeaderText(null);
-            error.setContentText("An error has occurred while loading your expenses");
-            
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String exceptionText = sw.toString();
-            
-            Label label = new Label("Exception:");
-            
-            TextArea textArea = new TextArea(exceptionText);
-            textArea.setEditable(false);
-            textArea.setWrapText(true);
-            
-            textArea.setMaxWidth(Double.MAX_VALUE);
-            textArea.setMaxHeight(Double.MAX_VALUE);
-            GridPane.setVgrow(textArea,Priority.ALWAYS);
-            GridPane.setHgrow(textArea,Priority.ALWAYS);
-            
-            GridPane expContent = new GridPane();
-            expContent.setMaxWidth(Double.MAX_VALUE);
-            expContent.add(label, 0, 0);
-            expContent.add(textArea, 0 ,1);
-            
-            error.getDialogPane().setExpandableContent(expContent);
-            error.showAndWait();
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
+                error.setTitle("Exception Dialog");
+                error.setHeaderText(null);
+                error.setContentText("An error has occurred while loading your expenses");
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea,Priority.ALWAYS);
+                GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label, 0, 0);
+                expContent.add(textArea, 0 ,1);
+
+                error.getDialogPane().setExpandableContent(expContent);
+                error.showAndWait();
             }
         });
         
@@ -275,6 +288,7 @@ public class ExpenseAccountController implements Initializable {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
         primaryStage.show();
+        primaryStage.setResizable(true);
     }
 
     @FXML
@@ -292,6 +306,9 @@ public class ExpenseAccountController implements Initializable {
             primaryStage.setTitle("Compare with same month from last year");
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -337,6 +354,9 @@ public class ExpenseAccountController implements Initializable {
             primaryStage.setTitle("Compare with rest of year");
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -373,6 +393,9 @@ public class ExpenseAccountController implements Initializable {
             chargeList = account.getUserCharges();
         } catch (Exception e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your expenses");
