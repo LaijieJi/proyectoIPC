@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
+<BorderPane fx:id="borderPane" maxHeight="500.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
@@ -21,9 +21,9 @@
                      <VBox.margin>
                         <Insets bottom="40.0" />
                      </VBox.margin></Text>
-                  <VBox alignment="CENTER" prefHeight="0.0" spacing="20.0">
+                  <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="NEVER">
                      <children>
-                        <VBox alignment="CENTER_LEFT" fillWidth="false">
+                        <VBox alignment="CENTER_LEFT" fillWidth="false" VBox.vgrow="NEVER">
                            <children>
                               <Label text="Nickname">
                                  <VBox.margin>
@@ -36,7 +36,7 @@
                         </VBox>
                         <VBox>
                            <children>
-                              <HBox alignment="CENTER_LEFT" spacing="5.0">
+                              <HBox alignment="BOTTOM_LEFT" spacing="5.0" VBox.vgrow="NEVER">
                                  <children>
                                     <VBox>
                                        <children>
@@ -45,7 +45,7 @@
                                                 <Insets bottom="5.0" left="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <HBox prefHeight="26.0" prefWidth="450.0">
+                                          <HBox prefHeight="26.0" prefWidth="450.0" spacing="10.0">
                                              <children>
                                                 <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" prefHeight="26.0" prefWidth="400.0" promptText="Password" />
                                                 <Button fx:id="seePasswordButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="👁" />

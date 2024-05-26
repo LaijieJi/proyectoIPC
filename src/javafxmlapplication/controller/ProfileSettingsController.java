@@ -222,6 +222,7 @@ public class ProfileSettingsController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Main");
+            primaryStage.setResizable(true);
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Exception Dialog");

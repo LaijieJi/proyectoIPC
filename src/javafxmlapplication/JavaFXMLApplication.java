@@ -33,7 +33,7 @@ public class JavaFXMLApplication extends Application {
         //     - se muestra el stage de manera no modal mediante el metodo show()
         stage.setScene(scene);
         stage.setTitle("Login");
-        
+        stage.setResizable(false);
         stage.show();
     }
 

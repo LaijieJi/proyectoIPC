@@ -224,6 +224,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Profile Settings");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }
@@ -250,6 +251,7 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(root);
                     primaryStage.setScene(scene);
                     primaryStage.setTitle("Log in");
+                    primaryStage.setResizable(false);
                 } catch (Exception e) {
                     Alert error = new Alert(AlertType.ERROR);
                     error.setTitle("Exception Dialog");
@@ -382,6 +384,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Generate Report");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
             error.setTitle("Exception Dialog");
@@ -428,6 +431,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Expense Account");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
             error.setTitle("Exception Dialog");
@@ -472,6 +476,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Manage categories");
+            primaryStage.setResizable(false);
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
             error.setTitle("Exception Dialog");
