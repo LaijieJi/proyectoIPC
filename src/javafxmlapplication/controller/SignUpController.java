@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -121,6 +122,9 @@ public class SignUpController implements Initializable {
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -150,6 +154,9 @@ public class SignUpController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -292,7 +299,37 @@ public class SignUpController implements Initializable {
                 registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
                         usernameField.getText() , password, profilePicture.getImage(), LocalDate.now());
             } catch (Exception e) {
-                System.err.println(e);
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
+                error.setTitle("Exception Dialog");
+                error.setHeaderText(null);
+                error.setContentText("An error has occurred while registeing the changes");
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea,Priority.ALWAYS);
+                GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label, 0, 0);
+                expContent.add(textArea, 0 ,1);
+
+                error.getDialogPane().setExpandableContent(expContent);
+                error.showAndWait();
             }
 
             if(registered) {
@@ -411,7 +448,16 @@ public class SignUpController implements Initializable {
 		
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
-        if(selectedFile == null) return;
+        if(selectedFile == null) {
+            Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred trying to open the file");
+            error.showAndWait();
+        }
         
         avatar = new Image(selectedFile.toURI().toString());
         //The avatar gets cut to fit the ImageView squared shape

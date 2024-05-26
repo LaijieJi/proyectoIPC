@@ -14,8 +14,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .button{
     -fx-background-color: #03a8c9;
-    -fx-background-radius: 15px;
-    -fx-border-radius: 15px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
     -fx-border-width: 2px;
     -fx-text-fill: black;
 }
@@ -38,6 +38,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-weight: bold;
 }
 
+.list-view{
+    -fx-background-color: beige;
+} 
+
+.list-view .list-cell{
+    -fx-background-color: #e6faff;
+    -fx-border-color: #81e8fd;
+    -fx-border-width: 0.2px;
+}
+
+.list-view .list-cell:focused{
+    -fx-background-color: #03aed2;
+    -fx-text-fill: black;
+    -fx-border-color: #fdde55;
+    -fx-border-width: 2px;
+}
+
+.list-view .list-cell:hover{
+    -fx-background-color: #03bde2;
+}
+
 .alert{
     -fx-background-color: white;
 }
@@ -55,6 +76,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .alert .label.content{
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-background-color: white;
 }
 
 .alert .button-bar .container{
@@ -65,7 +87,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: #0393b0;
     -fx-text-fill: white;
     -fx-font-size: 12px;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 12px;
 }
 
 .alert .button-bar .button:hover, alert .button-bar> .button:focussed{

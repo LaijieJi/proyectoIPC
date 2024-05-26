@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -74,6 +75,9 @@ public class ModifyCategoryController implements Initializable {
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -103,6 +107,9 @@ public class ModifyCategoryController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -169,6 +176,9 @@ public class ModifyCategoryController implements Initializable {
             account.registerCategory(nameText.getText(), colorPicker.getValue().toString() + "/" + descriptionText.getText());
         } catch (AcountDAOException ex) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred adding the category");

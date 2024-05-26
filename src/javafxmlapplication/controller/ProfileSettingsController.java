@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -108,6 +109,9 @@ public class ProfileSettingsController implements Initializable {
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -137,6 +141,9 @@ public class ProfileSettingsController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -224,6 +231,9 @@ public class ProfileSettingsController implements Initializable {
             primaryStage.setTitle("Main");
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("Unable to load the page");
@@ -288,6 +298,14 @@ public class ProfileSettingsController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
         if(selectedFile == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred trying to open the file");
+            error.showAndWait();
             return;
         }
         

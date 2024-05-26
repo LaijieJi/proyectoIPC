@@ -27,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -100,6 +101,9 @@ public class UpdateExpenseController implements Initializable {
             categorySelection.setItems(categoriesl);
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -129,6 +133,9 @@ public class UpdateExpenseController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -198,6 +205,9 @@ public class UpdateExpenseController implements Initializable {
             cost = Double.valueOf(costField.getText());
         }catch (NumberFormatException ne){
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText("Invalid format for Amount field");
             error.setContentText("The value for amount field must be a number. A value by default was set instead.");
@@ -232,6 +242,9 @@ public class UpdateExpenseController implements Initializable {
             units = Integer.valueOf(unitField.getText());
         }catch (NumberFormatException ne){
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText("Invalid format for Unit field");
             error.setContentText("The value for unit field must be a number. A value by default was set instead.");
@@ -267,6 +280,9 @@ public class UpdateExpenseController implements Initializable {
             account.registerCharge(nameField.getText(), descriptionField.getText(), cost, units, invoice, date, category);
         }catch (AcountDAOException e){
             Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while adding the expense");
@@ -322,6 +338,14 @@ public class UpdateExpenseController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         if(selectedFile == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred trying to open the file");
+            error.showAndWait();
             return;
         }
         invoice = new Image(selectedFile.toURI().toString());

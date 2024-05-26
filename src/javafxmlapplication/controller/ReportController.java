@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -66,6 +67,9 @@ public class ReportController implements Initializable {
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -95,6 +99,9 @@ public class ReportController implements Initializable {
             error.showAndWait();
         } catch (IOException ioe) {
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred while loading your account");
@@ -162,6 +169,9 @@ public class ReportController implements Initializable {
                 }
 
                 Alert alert = new Alert(AlertType.INFORMATION);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                alert.getDialogPane().getStyleClass().add("alert");
                 alert.setTitle("Saved report");
                 alert.setHeaderText(null);
                 alert.setContentText("Your report has been saved to " + file.getAbsolutePath());
@@ -171,6 +181,9 @@ public class ReportController implements Initializable {
                 primaryStage.show();
             } catch (IOException ex) {
                 Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
                 error.setTitle("Exception Dialog");
                 error.setHeaderText(null);
                 error.setContentText("An error has occurred trying to create the file");
@@ -200,6 +213,9 @@ public class ReportController implements Initializable {
                 error.showAndWait();
             }catch (AcountDAOException ex) {
                 Alert error = new Alert(AlertType.ERROR);
+                DialogPane dialogPane = error.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+                error.getDialogPane().getStyleClass().add("alert");
                 error.setTitle("Exception Dialog");
                 error.setHeaderText(null);
                 error.setContentText("An error has occurred trying to create the file");
@@ -230,9 +246,13 @@ public class ReportController implements Initializable {
             }
         }else{
             Alert error = new Alert(AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText(null);
             error.setContentText("An error has occurred trying to create the file");
+            error.showAndWait();
         }
         
     }
