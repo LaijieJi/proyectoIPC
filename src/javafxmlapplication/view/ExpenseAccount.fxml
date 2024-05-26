@@ -56,11 +56,7 @@
                </padding>
             </HBox>
             <Separator prefWidth="200.0" />
-<<<<<<< HEAD
             <ListView fx:id="expenseList" prefHeight="400.0" prefWidth="830.0">
-=======
-            <ListView fx:id="expenseList" prefHeight="437.0" prefWidth="830.0">
->>>>>>> e76dd241118f53d0592d951ab1ca8715c35b7d30
                <VBox.margin>
                   <Insets left="50.0" right="50.0" top="20.0" />
                </VBox.margin>

@@ -7,12 +7,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="cell" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ExpenseCardController">
+<HBox fx:id="cell" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ExpenseCardController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" maxWidth="120.0" minWidth="60.0" prefWidth="100.0">
          <children>
             <Circle fx:id="colorCircle" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label fx:id="category" text="Category" />
+            <Label fx:id="category" lineSpacing="60.0" text="Category" />
          </children>
       </VBox>
       <VBox fx:id="mainVBox" maxWidth="1.7976931348623157E308" minWidth="200.0" prefHeight="150.0" prefWidth="600.0" spacing="20.0">
