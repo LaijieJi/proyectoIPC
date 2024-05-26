@@ -7,7 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 .root{
-    -fx-background-color: beige;
+    -fx-background-color: #fff8e7;
     -fx-text-fill: black;
     -fx-font-size: 12px;
 }
@@ -17,13 +17,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-radius: 12px;
     -fx-border-radius: 12px;
     -fx-border-width: 2px;
-    -fx-text-fill: black;
+    -fx-text-fill: beige;
+    -fx-font-size: 15px;
 }
 .button:focused, .button:hover{
     -fx-font-weight: bold;
-    -fx-font-size: 12.5px;
+    -fx-font-size: 15px;
     -fx-border-color: #fdde55;
 }
+
 .button:pressed{
     -fx-background-color: #03bde2;
 }
@@ -34,12 +36,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-weight: bold;
 }
 
+#penIconButton{
+    -fx-background-color: #03a8c9;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-width: 2px;
+    -fx-text-fill: beige;
+    -fx-font-size: 20px;
+}
+
 .sub-header{
     -fx-font-weight: bold;
 }
 
 .list-view{
     -fx-background-color: e6faff;
+    -fx-border-color: whitesmoke;
+    -fx-border-width: 1px;
 } 
 
 .list-view .list-cell{
