@@ -64,6 +64,8 @@ public class LogInController implements Initializable {
     private PasswordField passwordInput;
     @FXML
     private Button seePasswordButton;
+    @FXML
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -71,7 +73,6 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // testing credentials -> username: test, password: test123
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
@@ -255,6 +256,7 @@ public class LogInController implements Initializable {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Main Page");
+        primaryStage.setResizable(true);
     }
 
     @FXML

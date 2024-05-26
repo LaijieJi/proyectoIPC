@@ -143,6 +143,7 @@ public class ReportController implements Initializable {
     private void onBackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

@@ -288,6 +288,7 @@ public class ExpenseAccountController implements Initializable {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
         primaryStage.show();
+        primaryStage.setResizable(true);
     }
 
     @FXML

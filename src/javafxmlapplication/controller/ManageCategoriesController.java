@@ -163,6 +163,7 @@ public class ManageCategoriesController implements Initializable {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
         primaryStage.show();
+        primaryStage.setResizable(true);
     }
 
     @FXML
