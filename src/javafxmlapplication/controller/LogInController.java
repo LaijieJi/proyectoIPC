@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.Bindings;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,6 +49,8 @@ public class LogInController implements Initializable {
     private Acount account;
     
     private String password;
+    
+    private int logInOK;
 
     @FXML
     private TextField nickNameInput;
@@ -141,6 +145,11 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
         
+        loginButton.setDisable(true);
+        logInOK = 0;
+        
+        /***seePasswordButton config***/
+        seePasswordButton.setDisable(true);
         seePasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
             password = passwordInput.getText();
             passwordInput.clear();
@@ -148,8 +157,16 @@ public class LogInController implements Initializable {
         });
         seePasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
             passwordInput.setText(password);
-            passwordInput.setPromptText("Password");
+            passwordInput.setPromptText("");
         });
+        
+        BooleanBinding fieldsFilled = Bindings.createBooleanBinding(
+            () -> !nickNameInput.getText().trim().isEmpty() && !passwordInput.getText().trim().isEmpty(),
+            nickNameInput.textProperty(),
+            passwordInput.textProperty()
+        );
+
+        loginButton.disableProperty().bind(fieldsFilled.not());
     }    
     
     public void initLogin(Stage stage){
@@ -159,31 +176,10 @@ public class LogInController implements Initializable {
     }
 
     @FXML
-    private void onTextTyped(KeyEvent event) {
-        String text = nickNameInput.getText();
-        if(text.contains(" ")) {
-            nickNameErrorText.setText("Nickname cannot contain blankspaces");
-        } else {
-            nickNameErrorText.setText(" ");
-        }
-    }
-
-    @FXML
     private void onLoginButtonPressed(ActionEvent event) throws IOException{
         String nickname = nickNameInput.getText();
         String password = passwordInput.getText();
-        if(nickname.contains(" ")) {
-            nickNameErrorText.setText("Nickname cannot contain blankspaces");
-            return;
-        }
-        if(nickname.length() == 0) {
-            nickNameErrorText.setText("Nickname field cannot be empty");
-            return;
-        }
-        if(password.length() <= 6) {
-            passwordErrorText.setText("Password must have length greater than 6");
-            return;
-        }
+        
         try{
             boolean login = account.logInUserByCredentials(nickname, password);
             if(login) {
@@ -225,7 +221,7 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
     }
-
+    
     @FXML
     private void onSignUpButtonPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignUp.fxml"));
@@ -259,6 +255,14 @@ public class LogInController implements Initializable {
         primaryStage.setResizable(true);
     }
 
+    
+        @FXML
+    private void onPasswordWritten(KeyEvent event) {
+        seePasswordButton.setDisable(true);
+        if(!passwordInput.getText().isEmpty()) seePasswordButton.setDisable(false);
+    }
+    
+    /***ALL: Window navigation via ENTER key***/
     @FXML
     private void onKeyPressedOnNickName(KeyEvent event) {
         KeyCode code = event.getCode();
@@ -313,5 +317,7 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
     }
+
+
 
 }

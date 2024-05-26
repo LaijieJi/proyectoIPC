@@ -516,7 +516,7 @@ public class SignUpController implements Initializable {
     
     /***ALL: Window navigation via ENTER key***/
     @FXML
-    private void onKeyPressedOnName(KeyEvent event) {
+    private void onKeyName(KeyEvent event) {
         KeyCode code = event.getCode();
         if(code != null && code.equals(KeyCode.ENTER)) {
             surnameField.requestFocus();
