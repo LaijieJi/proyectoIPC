@@ -7,6 +7,8 @@ package javafxmlapplication.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -18,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -28,6 +32,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -114,9 +120,63 @@ public class SignUpController implements Initializable {
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {
-            System.err.println(e);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
         
         /***Profile Picture related init config***/

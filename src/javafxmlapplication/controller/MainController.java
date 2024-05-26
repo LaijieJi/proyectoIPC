@@ -5,6 +5,8 @@
 package javafxmlapplication.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,10 +24,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -87,9 +93,63 @@ public class MainController implements Initializable {
             account = Acount.getInstance();
             user = account.getLoggedUser();
         } catch (AcountDAOException e) {
-            System.err.println(e);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
         
         deleteButton.disableProperty().bind(
@@ -102,7 +162,34 @@ public class MainController implements Initializable {
             categoryList = account.getUserCategories();
             dataList = account.getUserCharges();
         } catch (Exception e) {
-            System.err.println(e);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account's infromation");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
         
         observableDataList = FXCollections.observableArrayList(dataList);
@@ -164,10 +251,37 @@ public class MainController implements Initializable {
                     primaryStage.setScene(scene);
                     primaryStage.setTitle("Log in");
                 } catch (Exception e) {
-                    System.err.println(e);
+                    Alert error = new Alert(AlertType.ERROR);
+                    error.setTitle("Exception Dialog");
+                    error.setHeaderText(null);
+                    error.setContentText("Unable to load the page");
+
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
+                    String exceptionText = sw.toString();
+
+                    Label label = new Label("Exception:");
+
+                    TextArea textArea = new TextArea(exceptionText);
+                    textArea.setEditable(false);
+                    textArea.setWrapText(true);
+
+                    textArea.setMaxWidth(Double.MAX_VALUE);
+                    textArea.setMaxHeight(Double.MAX_VALUE);
+                    GridPane.setVgrow(textArea,Priority.ALWAYS);
+                    GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                    GridPane expContent = new GridPane();
+                    expContent.setMaxWidth(Double.MAX_VALUE);
+                    expContent.add(label, 0, 0);
+                    expContent.add(textArea, 0 ,1);
+
+                    error.getDialogPane().setExpandableContent(expContent);
+                    error.showAndWait();
                 }
             }
-        }
+        } 
     }
 
     @FXML
@@ -193,12 +307,66 @@ public class MainController implements Initializable {
                 observableDataList = FXCollections.observableArrayList(dataList);
                 expenseList.setItems(observableDataList);
             } catch (Exception e) {
-                System.err.println(e);
+                Alert error = new Alert(AlertType.ERROR);
+                error.setTitle("Exception Dialog");
+                error.setHeaderText(null);
+                error.setContentText("An error has occurred while adding the charge");
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String exceptionText = sw.toString();
+
+                Label label = new Label("Exception:");
+
+                TextArea textArea = new TextArea(exceptionText);
+                textArea.setEditable(false);
+                textArea.setWrapText(true);
+
+                textArea.setMaxWidth(Double.MAX_VALUE);
+                textArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(textArea,Priority.ALWAYS);
+                GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                GridPane expContent = new GridPane();
+                expContent.setMaxWidth(Double.MAX_VALUE);
+                expContent.add(label, 0, 0);
+                expContent.add(textArea, 0 ,1);
+
+                error.getDialogPane().setExpandableContent(expContent);
+                error.showAndWait();
             }
             expenseList.refresh();
             expenseList.getSelectionModel().selectLast();
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 
@@ -215,7 +383,34 @@ public class MainController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Generate Report");
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 
@@ -234,7 +429,34 @@ public class MainController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Expense Account");
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 
@@ -251,7 +473,34 @@ public class MainController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Manage categories");
         } catch (IOException ioe) {
-            System.err.println("Unable to load that page: " + ioe);
+            Alert error = new Alert(AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
     }
 

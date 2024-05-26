@@ -5,6 +5,8 @@
 package javafxmlapplication.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +21,12 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Acount;
@@ -54,9 +61,63 @@ public class YearComparisonController implements Initializable {
             account = Acount.getInstance();
             listOfCharges = account.getUserCharges();
         } catch (AcountDAOException e) {
-            System.err.println(e);
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while loading your account");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
         }
 
         final CategoryAxis xAxis = new CategoryAxis();

@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.MainController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -89,7 +89,19 @@
    <center>
       <HBox spacing="20.0">
          <children>
+<<<<<<< HEAD
             <ListView fx:id="expenseList" maxHeight="800.0" maxWidth="1000.0" minWidth="360.0" prefHeight="600.0" HBox.hgrow="ALWAYS">
+=======
+            <Button fx:id="addButton" maxWidth="1000.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#addExpense" prefHeight="30.0" prefWidth="570.0" text="+">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </Button>
+            <ListView fx:id="expenseList" maxHeight="500.0" maxWidth="1000.0" minWidth="600.0" prefHeight="462.0" prefWidth="660.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+>>>>>>> e76dd241118f53d0592d951ab1ca8715c35b7d30
                <padding>
                   <Insets bottom="20.0" />
                </padding>
