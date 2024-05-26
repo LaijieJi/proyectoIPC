@@ -78,7 +78,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="App title" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CashTrack" />
          </children>
       </HBox>
    </top>

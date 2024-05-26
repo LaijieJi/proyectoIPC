@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -204,16 +204,10 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="371.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="370.4828125">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Text>
-            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="17.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="17.0">
+            <Button fx:id="goBackButton" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="17.0" mnemonicParsing="false" onAction="#onGobackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="17.0" />
          </children>
       </AnchorPane>
    </top>

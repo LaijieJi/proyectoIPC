@@ -582,12 +582,16 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.setResizable(false);
             stage.setScene(scene);
-            stage.setTitle("Add Expense");
+            stage.setTitle("Edit Expense");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            
+            int prevCount = dataList.size();
             try{
                 categoryList = account.getUserCategories();
+                dataList = account.getUserCharges();
+                if(dataList.size() == prevCount + 1) {
+                    account.removeCharge(editingCharge);
+                }
                 dataList = account.getUserCharges();
                 observableDataList = FXCollections.observableArrayList(dataList);
                 expenseList.setItems(observableDataList);
