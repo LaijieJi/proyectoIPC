@@ -140,7 +140,7 @@ public class SameMonthLastYearController implements Initializable {
         chart.setTitle("Month Comparison");
         chart.setBarGap(1.0);
         chart.setAnimated(false);
-        chart.setLegendSide(Side.RIGHT);
+        chart.setLegendSide(Side.BOTTOM);
         
         LocalDate now = LocalDate.now();
         YearMonth currentYearMonth = YearMonth.of(now.getYear(), now.getMonthValue());

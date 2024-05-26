@@ -133,7 +133,7 @@ public class YearComparisonController implements Initializable {
         chart.setTitle("Year Comparison");
         chart.setBarGap(1.0);
         chart.setAnimated(false);
-        chart.setLegendSide(Side.RIGHT);
+        chart.setLegendSide(Side.BOTTOM);
 
         double[] months = new double[13];
 
