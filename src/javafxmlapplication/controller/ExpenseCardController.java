@@ -57,6 +57,12 @@ public class ExpenseCardController implements Initializable {
     private Runnable deleteAction;
     
     private ContextMenu contextualMenu;
+    @FXML
+    private Label category;
+    @FXML
+    private Label date;
+    @FXML
+    private Label units;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -143,9 +149,12 @@ public class ExpenseCardController implements Initializable {
     public void setCharge(Charge charge) {
         this.charge = charge;
         if (charge != null) {
+            category.setText(charge.getCategory().getName());
             title.setText(charge.getName());
             description.setText(charge.getDescription());
-            costLabel.setText(String.valueOf(charge.getCost()));
+            date.setText(charge.getDate().toString());
+            costLabel.setText(String.valueOf(charge.getCost()) + "€");
+            units.setText("Units: " + String.valueOf(charge.getUnits()));
             String[] s = charge.getCategory().getDescription().split("/");
             colorCircle.setFill(Color.valueOf(s[0]));
          }
