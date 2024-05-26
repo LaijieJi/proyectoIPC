@@ -10,16 +10,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="35.0" prefWidth="40.0" text="◄">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets left="20.0" />
                </HBox.margin>
             </Button>
          </children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
       </HBox>
    </top>
    <center>
@@ -46,10 +49,10 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="570.0" prefWidth="361.0" spacing="20.0">
                <children>
-                  <TextField fx:id="locationField" promptText="Write a name for the report" />
+                  <TextField fx:id="locationField" prefHeight="30.0" promptText="Write a name for the report" />
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveReportButtonPressed" prefHeight="25.0" prefWidth="87.0" text="Save report" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveReportButtonPressed" prefHeight="25.0" prefWidth="120.0" text="Save report" />
                      </children>
                   </HBox>
                </children>
