@@ -43,9 +43,9 @@
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fx:id="mailLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="(Email)" wrappingWidth="100.0">
+                        <Text fx:id="mailLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-email" text="(Email)" wrappingWidth="100.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="11.0" />
                            </font>
                         </Text>
                      </children>

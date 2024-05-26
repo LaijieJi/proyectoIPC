@@ -107,3 +107,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-weight: bold;
 }
 
+.label-email{
+    -fx-font-size: 10px;
+}
+
