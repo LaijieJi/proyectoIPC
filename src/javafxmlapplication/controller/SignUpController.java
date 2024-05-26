@@ -141,9 +141,11 @@ public class SignUpController implements Initializable {
         sixCharLengthText.setFill(Color.BLACK);
         alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
-        confirmPasswordField.setDisable(true);
+        
         confirmPasswordMessage.setVisible(false);
         usernameWarningText.setVisible(false);
+        
+        confirmPasswordField.setDisable(true);
     }    
     
     public void initSignUpPage(Stage stage){

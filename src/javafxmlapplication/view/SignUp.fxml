@@ -114,7 +114,7 @@
                               <Insets />
                            </VBox.margin>
                         </TextField>
-                        <Text fx:id="usernameWarningText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Cannot contain blank spaces" visible="false" />
+                        <Text fx:id="usernameWarningText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Cannot contain blank spaces" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="506.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
@@ -152,7 +152,7 @@
                   <VBox fillWidth="false" prefWidth="506.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
                      <children>
                         <PasswordField fx:id="confirmPasswordField" onKeyPressed="#onKeyPressedOnConfirmPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="456.0" promptText="Confirm password" />
-                        <Text fx:id="confirmPasswordMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="The passwords don't match" visible="false" />
+                        <Text fx:id="confirmPasswordMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="The passwords don't match" />
                      </children>
                   </VBox>
                </children>
