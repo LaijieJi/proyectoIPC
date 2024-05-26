@@ -370,7 +370,7 @@ public class ProfileSettingsController implements Initializable {
         if(code.equals(KeyCode.ENTER)) {
             onKeyPressedOnPassword(event);
         } else {
-            wrongPasswordText.setVisible(false);
+            //wrongPasswordText.setVisible(false);
             viewPasswordButton.setDisable(true);
             if(!passwordField.getText().isEmpty()) viewPasswordButton.setDisable(false);
         }
@@ -400,7 +400,7 @@ public class ProfileSettingsController implements Initializable {
             viewNewPasswordButton.setDisable(false);
             //Length requisite
             if(password.length() > 6) {
-                sixCharLengthText.setText("?? More than 6 characters long");
+                sixCharLengthText.setText("🗸 More than 6 characters long");
                 sixCharLengthText.setFill(Color.FORESTGREEN);
             } else {
                 sixCharLengthText.setText("? More than 6 characters long");
@@ -409,7 +409,7 @@ public class ProfileSettingsController implements Initializable {
             }
             //Char requisite
             if(isAlphanumeric(password)) {
-                alphanumCharOnlyText.setText("?? Alphanumeric characters only");
+                alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
                 alphanumCharOnlyText.setFill(Color.FORESTGREEN);
             } else {
                 alphanumCharOnlyText.setText("? Alphanumeric characters only");
@@ -522,6 +522,7 @@ public class ProfileSettingsController implements Initializable {
                 sixCharLengthText.setVisible(true);
                 alphanumCharOnlyText.setVisible(true);
                 
+                wrongPasswordText.setVisible(false);
                 passwordField.setDisable(true);
                 viewPasswordButton.setDisable(true);
                 passwordLabel.setOpacity(0.2);
