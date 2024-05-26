@@ -30,7 +30,7 @@
                                     <Insets bottom="5.0" left="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" onKeyTyped="#onTextTyped" prefHeight="26.0" prefWidth="408.0" promptText="Nickname" />
+                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" onKeyTyped="#onTextTyped" prefHeight="26.0" prefWidth="400.0" promptText="Nickname" />
                               <Label fx:id="nickNameErrorText" styleClass="errorText" />
                            </children>
                         </VBox>
@@ -45,7 +45,7 @@
                                                 <Insets bottom="5.0" left="5.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" prefHeight="26.0" prefWidth="418.0" promptText="Password" />
+                                          <PasswordField fx:id="passwordInput" onKeyPressed="#onKeyPressedOnPassword" prefHeight="26.0" prefWidth="400.0" promptText="Password" />
                                        </children>
                                     </VBox>
                                     <Button fx:id="seePasswordButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="👁" />

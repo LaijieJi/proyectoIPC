@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Window;
 import model.Acount;
@@ -65,7 +66,6 @@ public class ExpenseCardController implements Initializable {
             }
         });
         
-
         contextualMenu.getItems().addAll(edit, delete);
         threeDotButton.setContextMenu(contextualMenu);
         
@@ -77,7 +77,9 @@ public class ExpenseCardController implements Initializable {
             title.setText(charge.getName());
             description.setText(charge.getDescription());
             costLabel.setText(String.valueOf(charge.getCost()));
-        }
+            String[] s = charge.getCategory().getDescription().split("/");
+            colorCircle.setFill(Color.valueOf(s[0]));
+         }
     }
 
     @FXML
