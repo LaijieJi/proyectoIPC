@@ -76,6 +76,8 @@ public class UpdateExpenseController implements Initializable {
     private Image invoice;
     
     List<Category> categories;
+    @FXML
+    private Button goBackButton;
 
     
     /**
@@ -178,5 +180,9 @@ public class UpdateExpenseController implements Initializable {
         invoice = null;
         invoiceText.setText("");
         deleteInvoice.setText("");
+    }
+
+    @FXML
+    private void onGoBack(ActionEvent event) {
     }
 }

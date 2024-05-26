@@ -75,6 +75,8 @@ public class MainController implements Initializable {
     public ListView<Charge> expenseList;
     @FXML
     private Button logOutButton;
+    @FXML
+    private Button deleteButton;
 
     /**
      * Initializes the controller class.
@@ -89,6 +91,12 @@ public class MainController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        deleteButton.disableProperty().bind(
+                expenseList.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
+        
+        editButton.disableProperty().bind(
+                expenseList.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
         
         try{
             categoryList = account.getUserCategories();
@@ -246,5 +254,56 @@ public class MainController implements Initializable {
             System.err.println("Unable to load that page: " + ioe);
         }
     }
-    
+
+    @FXML
+    private void onEdit(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/UpdateExpense.fxml"));
+            BorderPane root = loader.load();
+            Charge editingCharge = expenseList.getSelectionModel().getSelectedItem();
+            UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
+            updateExpenseController.initExpense(editingCharge.getName(), editingCharge.getCost(),
+                                               editingCharge.getUnits(), editingCharge.getDescription(), 
+                                               editingCharge.getCategory(), editingCharge.getDate());
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Add Expense");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+            try{
+                categoryList = account.getUserCategories();
+                dataList = account.getUserCharges();
+                observableDataList = FXCollections.observableArrayList(dataList);
+                expenseList.setItems(observableDataList);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+            expenseList.refresh();
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
+    }
+
+    @FXML
+    private void onDelete(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete charge");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this charge?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            try {
+                account.removeCharge(expenseList.getSelectionModel().getSelectedItem());
+                observableDataList.remove(expenseList.getSelectionModel().getSelectedItem());
+                expenseList.getSelectionModel().clearSelection();
+            } catch (AcountDAOException ex) {
+                System.err.println(ex);
+            }
+        }
+    }
 }

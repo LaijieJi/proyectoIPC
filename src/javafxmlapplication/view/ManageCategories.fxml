@@ -20,7 +20,7 @@
                <children>
                   <Button fx:id="newCategoryButton" mnemonicParsing="false" onAction="#onAddButtonPressed" prefHeight="57.0" prefWidth="59.0">
                      <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../styles/resources/plus.png" />
                            </image>
@@ -29,7 +29,7 @@
                   </Button>
                   <Button fx:id="deleteCategoryButton" mnemonicParsing="false" onAction="#onDeleteCategoryButtonPressed" prefHeight="57.0" prefWidth="58.0">
                      <graphic>
-                        <ImageView fitHeight="37.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../styles/resources/borrar.png" />
                            </image>
