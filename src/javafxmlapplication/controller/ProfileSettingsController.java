@@ -64,8 +64,6 @@ public class ProfileSettingsController implements Initializable {
             "../styles/resources/Profile_avatar_placeholder_large.png").toString()
                 );
     private Image avatar;
-    //For isAvatEmpty() to work correctly the 1st time
-    private boolean avEmpty = SignUpController.avEmpty;
     
     private boolean bothHold;
 	
@@ -197,8 +195,7 @@ public class ProfileSettingsController implements Initializable {
         emailField.setText(user.getEmail());
         
         /***Profile Picture related init config***/
-        if(avEmpty) profilePicture.setImage(emptyAvatar);
-        else profilePicture.setImage(user.getImage());
+        profilePicture.setImage(user.getImage());
         removePicture.toBack();
         
         /***viewPasswordButton & viewNewPasswordButton config***/
@@ -226,10 +223,10 @@ public class ProfileSettingsController implements Initializable {
         });
         
         /***Password-related & other warnings init config***/
-        sixCharLengthText.setText("? More than 6 characters long");
+        sixCharLengthText.setText("→ More than 6 characters long");
         sixCharLengthText.setFill(Color.BLACK);
         sixCharLengthText.setVisible(false);
-        alphanumCharOnlyText.setText("? Alphanumeric characters only");
+        alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
         alphanumCharOnlyText.setVisible(false);
         
@@ -401,9 +398,9 @@ public class ProfileSettingsController implements Initializable {
         bothHold = true;
         
         if(password.isEmpty()) {
-            sixCharLengthText.setText("? More than 6 characters long");
+            sixCharLengthText.setText("→ More than 6 characters long");
             sixCharLengthText.setFill(Color.BLACK);
-            alphanumCharOnlyText.setText("? Alphanumeric characters only");
+            alphanumCharOnlyText.setText("→ Alphanumeric characters only");
             alphanumCharOnlyText.setFill(Color.BLACK);
         } else {
             confirmPasswordMessage.setVisible(false);
@@ -413,7 +410,7 @@ public class ProfileSettingsController implements Initializable {
                 sixCharLengthText.setText("🗸 More than 6 characters long");
                 sixCharLengthText.setFill(Color.FORESTGREEN);
             } else {
-                sixCharLengthText.setText("? More than 6 characters long");
+                sixCharLengthText.setText("→ More than 6 characters long");
                 sixCharLengthText.setFill(Color.RED);
                 bothHold &= false;
             }
@@ -422,7 +419,7 @@ public class ProfileSettingsController implements Initializable {
                 alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
                 alphanumCharOnlyText.setFill(Color.FORESTGREEN);
             } else {
-                alphanumCharOnlyText.setText("? Alphanumeric characters only");
+                alphanumCharOnlyText.setText("→ Alphanumeric characters only");
                 alphanumCharOnlyText.setFill(Color.RED);
                 bothHold &= false;
             }
@@ -458,14 +455,6 @@ public class ProfileSettingsController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
         if(selectedFile == null) {
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            DialogPane dialogPane = error.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
-            error.getDialogPane().getStyleClass().add("alert");
-            error.setTitle("Exception Dialog");
-            error.setHeaderText(null);
-            error.setContentText("An error has occurred trying to open the file");
-            error.showAndWait();
             return;
         }
         

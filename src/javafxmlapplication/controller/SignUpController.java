@@ -294,12 +294,10 @@ public class SignUpController implements Initializable {
         if(everythingOK) {
             System.out.println("everything ok");
             boolean registered = false;
-            //In order for Picture removal in Profile Settings to go smoothly
-            if(isAvatEmpty()) avEmpty = true;
             
             try{
                 registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
-                        usernameField.getText() , password, profilePicture.getImage(), LocalDate.now());
+                        usernameField.getText(), password, profilePicture.getImage(), LocalDate.now());
             } catch (Exception e) {
                 Alert error = new Alert(Alert.AlertType.ERROR);
                 DialogPane dialogPane = error.getDialogPane();
