@@ -219,10 +219,10 @@ public class ProfileSettingsController implements Initializable {
         });
         
         /***Password-related & other warnings init config***/
-        sixCharLengthText.setText("? More than 6 characters long");
+        sixCharLengthText.setText("→ More than 6 characters long");
         sixCharLengthText.setFill(Color.BLACK);
         sixCharLengthText.setVisible(false);
-        alphanumCharOnlyText.setText("? Alphanumeric characters only");
+        alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
         alphanumCharOnlyText.setVisible(false);
         
@@ -390,28 +390,28 @@ public class ProfileSettingsController implements Initializable {
         bothHold = true;
         
         if(password.isEmpty()) {
-            sixCharLengthText.setText("? More than 6 characters long");
+            sixCharLengthText.setText("→ More than 6 characters long");
             sixCharLengthText.setFill(Color.BLACK);
-            alphanumCharOnlyText.setText("? Alphanumeric characters only");
+            alphanumCharOnlyText.setText("→ Alphanumeric characters only");
             alphanumCharOnlyText.setFill(Color.BLACK);
         } else {
             confirmPasswordMessage.setVisible(false);
             viewNewPasswordButton.setDisable(false);
             //Length requisite
             if(password.length() > 6) {
-                sixCharLengthText.setText("?? More than 6 characters long");
+                sixCharLengthText.setText("🗸 More than 6 characters long");
                 sixCharLengthText.setFill(Color.FORESTGREEN);
             } else {
-                sixCharLengthText.setText("? More than 6 characters long");
+                sixCharLengthText.setText("→ More than 6 characters long");
                 sixCharLengthText.setFill(Color.RED);
                 bothHold &= false;
             }
             //Char requisite
             if(isAlphanumeric(password)) {
-                alphanumCharOnlyText.setText("?? Alphanumeric characters only");
+                alphanumCharOnlyText.setText("🗸 Alphanumeric characters only");
                 alphanumCharOnlyText.setFill(Color.FORESTGREEN);
             } else {
-                alphanumCharOnlyText.setText("? Alphanumeric characters only");
+                alphanumCharOnlyText.setText("→ Alphanumeric characters only");
                 alphanumCharOnlyText.setFill(Color.RED);
                 bothHold &= false;
             }
