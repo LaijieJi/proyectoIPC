@@ -58,11 +58,10 @@ public class SignUpController implements Initializable {
             "../styles/resources/Profile_avatar_placeholder_large.png").toString()
                 );
     private Image avatar;
+    static boolean avEmpty = true;
          
     // variable used for checking all fields are correct
     boolean everythingOK = false;
-    
-    private static boolean isAvatEmpty = false;
     
     @FXML
     private Button goBackButton;
@@ -120,10 +119,9 @@ public class SignUpController implements Initializable {
             System.err.println(ioe);
         }
         
+        /***Profile Picture related init config***/
         removePicture.toBack();
         profilePicture.setImage(emptyAvatar);
-        isAvatEmpty = true;
-        confirmPasswordField.setDisable(true);
         
         /***viewPasswordButton config***/
         viewPasswordButton.setDisable(true);
@@ -138,11 +136,12 @@ public class SignUpController implements Initializable {
             passwordField.setPromptText("");
         });
         
-        /***Password-related & Username warnings initial config***/
+        /***Password-related & Username warnings init config***/
         sixCharLengthText.setText("→ More than 6 characters long");
         sixCharLengthText.setFill(Color.BLACK);
         alphanumCharOnlyText.setText("→ Alphanumeric characters only");
         alphanumCharOnlyText.setFill(Color.BLACK);
+        confirmPasswordField.setDisable(true);
         confirmPasswordMessage.setVisible(false);
         usernameWarningText.setVisible(false);
     }    
@@ -152,19 +151,11 @@ public class SignUpController implements Initializable {
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
     }
-            
+     
     @FXML
     private void onGobackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
-    }
-    
-    public static boolean getIsAvatEmpty() {
-        return isAvatEmpty;
-    }
-    
-    public static void setIsAvatEmpty(boolean newValue) {
-        isAvatEmpty = newValue;
     }
 
     @FXML
@@ -235,6 +226,7 @@ public class SignUpController implements Initializable {
             System.out.println("everything ok");
             boolean registered = false;
             //In order for Picture removal in Profile Settings to go smoothly
+            if(isAvatEmpty()) avEmpty = true;
             
             try{
                 registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
@@ -334,7 +326,7 @@ public class SignUpController implements Initializable {
         }
     }
 
-    public boolean isAlphanumeric(String str) {
+    public static boolean isAlphanumeric(String str) {
         for (int i=0; i<str.length(); i++) {
             char c = str.charAt(i);
             if (c < 0x30 || (c >= 0x3a && c <= 0x40) || (c > 0x5a && c <= 0x60) || c > 0x7a)
@@ -364,7 +356,6 @@ public class SignUpController implements Initializable {
         avatar = new Image(selectedFile.toURI().toString());
         //The avatar gets cut to fit the ImageView squared shape
         profilePicture.setImage(cropSquaredCenter(avatar));
-        isAvatEmpty = false;
     }
     
     //To crop the given image into a centered square, if not square-shaped already
@@ -390,7 +381,7 @@ public class SignUpController implements Initializable {
     /***ALL: Profile Picture removal***/
     @FXML
     private void onProfilePictureEntered(MouseEvent event) {
-        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        if(isAvatEmpty()) return;
         else {   
             profilePicture.setOpacity(0.5);
         }
@@ -398,17 +389,22 @@ public class SignUpController implements Initializable {
     
     @FXML
     private void onProfilePictureClicked(MouseEvent event){
-        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        if(isAvatEmpty()) return;
         else {   
             profilePicture.setImage(emptyAvatar);
             profilePicture.setOpacity(1);
-            isAvatEmpty = true;
         }
     }
       
     @FXML
     private void onProfilePictureExited(MouseEvent event) {
         profilePicture.setOpacity(1);
+    }
+    
+    boolean isAvatEmpty() {
+        if(profilePicture.getImage().getUrl() == null) return false; //If cropped image (local resource, no URL)
+        //equals() is not overriden by the Image class to compare the content of the images, so their URL is compared instead
+        else return profilePicture.getImage().getUrl().equals(emptyAvatar.getUrl());
     }
     
     

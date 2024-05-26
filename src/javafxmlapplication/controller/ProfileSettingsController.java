@@ -52,6 +52,8 @@ public class ProfileSettingsController implements Initializable {
             "../styles/resources/Profile_avatar_placeholder_large.png").toString()
                 );
     private Image avatar;
+    //For isAvatEmpty() to work correctly the 1st time
+    private boolean avEmpty = SignUpController.avEmpty;
 	
     @FXML
     private ImageView profilePicture;
@@ -109,9 +111,34 @@ public class ProfileSettingsController implements Initializable {
         nameField.setText(user.getName());
         surnameField.setText(user.getSurname());
         emailField.setText(user.getEmail());
-        if(SignUpController.getIsAvatEmpty()) profilePicture.setImage(emptyAvatar);
+        
+        /***Profile Picture related init config***/
+        if(avEmpty) profilePicture.setImage(emptyAvatar);
         else profilePicture.setImage(user.getImage());
         removePicture.toBack();
+        
+        /***viewPasswordButton & viewNewPasswordButton config***/
+        viewPasswordButton.setDisable(true);
+        viewPasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            password = passwordField.getText();
+            //After saving the password in a var, it's removed so as to show it as a prompt 
+            passwordField.clear();
+            passwordField.setPromptText(password);
+        });
+        viewPasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            passwordField.setText(password);
+            passwordField.setPromptText("");
+        });
+        viewNewPasswordButton.setDisable(true);
+        viewNewPasswordButton.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            password = newPasswordField.getText(); 
+            newPasswordField.clear();
+            newPasswordField.setPromptText(password);
+        });
+        viewNewPasswordButton.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            newPasswordField.setText(password);
+            newPasswordField.setPromptText("");
+        });
         
     }
     
@@ -139,7 +166,7 @@ public class ProfileSettingsController implements Initializable {
         }
     }
     
-    @FXML //!!! YET TO SOLVE THE NON-UPDATE IN OTHER WINDOWS
+    @FXML
     private void onSaveChangesButtonPressed(ActionEvent event) {
         name = nameField.getText();
         surname = surnameField.getText();
@@ -179,14 +206,13 @@ public class ProfileSettingsController implements Initializable {
         avatar = new Image(selectedFile.toURI().toString());
         //The avatar gets cut to fit the ImageView squared shape
         profilePicture.setImage(SignUpController.cropSquaredCenter(avatar));
-        SignUpController.setIsAvatEmpty(false);
     }
 
     
     /***ALL: Profile Picture removal***/
     @FXML
     private void onProfilePictureEntered(MouseEvent event) {
-        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        if(isAvatEmpty()) return;
         else {   
             profilePicture.setOpacity(0.5);
         }
@@ -194,17 +220,22 @@ public class ProfileSettingsController implements Initializable {
     
     @FXML
     private void onProfilePictureClicked(MouseEvent event){
-        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        if(isAvatEmpty()) return;
         else {   
             profilePicture.setImage(emptyAvatar);
             profilePicture.setOpacity(1);
-            SignUpController.setIsAvatEmpty(true);
         }
     }
       
     @FXML
     private void onProfilePictureExited(MouseEvent event) {
         profilePicture.setOpacity(1);
+    }
+    
+    boolean isAvatEmpty() {
+        if(profilePicture.getImage().getUrl() == null) return false; //If cropped image (local resource, no URL)
+        //equals() is not overriden by the Image class to compare the content of the images, so their URL is compared instead
+        else return profilePicture.getImage().getUrl().equals(emptyAvatar.getUrl());
     }
     
 }
