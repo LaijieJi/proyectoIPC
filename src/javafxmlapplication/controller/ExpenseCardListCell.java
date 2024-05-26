@@ -36,10 +36,7 @@ public class ExpenseCardListCell extends ListCell<Charge> {
                     e.printStackTrace();
                 }
             }
-            controller.setDeleteAction(() -> {
-                observableList.remove(item);
-            });
-            
+            cell.prefWidthProperty().bind( getListView().widthProperty().subtract( 20 ) );
             controller.setCharge(item);
             setText(null);
             setGraphic(cell);
