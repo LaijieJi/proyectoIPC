@@ -29,6 +29,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
@@ -101,17 +102,26 @@ public class ManageCategoriesController implements Initializable {
     private void onAddButtonPressed(ActionEvent event) throws IOException{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ModifyCategory.fxml"));
-            AnchorPane root = loader.load();
+            Pane root = loader.load();
             
             ModifyCategoryController modifyCategories = loader.<ModifyCategoryController>getController();
             modifyCategories.initFields(null,null);
             
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.setTitle("Modify category");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+            
+            try {
+                categories = account.getUserCategories();
+                list = FXCollections.observableList(categories);
+                categoryList.setItems(list);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
             
             categoryList.refresh();
             categoryList.getSelectionModel().selectLast();

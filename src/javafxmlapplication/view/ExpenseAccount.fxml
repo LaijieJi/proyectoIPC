@@ -17,11 +17,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ExpenseAccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ExpenseAccountController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="50.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <GridPane alignment="CENTER" prefHeight="50.0" prefWidth="700.0">
                     <columnConstraints>
@@ -38,7 +38,16 @@
                             <MenuItem fx:id="sameMonth" mnemonicParsing="false" onAction="#onSameMonth" text="Same month from last year" />
                           </items>
                         </MenuButton>
-                        <ChoiceBox fx:id="categorySelector" prefWidth="150.0" />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <ChoiceBox fx:id="categorySelector" prefWidth="150.0" />
+                              <Button fx:id="clearButton" mnemonicParsing="false" onAction="#removeFilter" text="Clear">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>

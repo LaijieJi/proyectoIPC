@@ -25,6 +25,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -63,6 +64,8 @@ public class ExpenseAccountController implements Initializable {
     private MenuItem restOfYear;
     @FXML
     private MenuItem sameMonth;
+    @FXML
+    private Button clearButton;
 
     /**
      * Initializes the controller class.
@@ -78,23 +81,42 @@ public class ExpenseAccountController implements Initializable {
         }
         
         try{
-            categoryList = account.getUserCategories();   
+            categoryList = account.getUserCategories();
             chargeList = account.getUserCharges();
         } catch (Exception e) {
             System.err.println(e);
         }
         
-        observableCatList = FXCollections.observableList(categoryList);
-        observableChargeList = FXCollections.observableList(chargeList);
-        categorySelector.selectionModelProperty().addListener((ob, oldVal, newVal) -> {
-            
-            // TODO: Filter by Category
-        });
+        observableCatList = FXCollections.observableArrayList(categoryList);
+        observableChargeList = FXCollections.observableArrayList(chargeList);
+        
         categorySelector.getSelectionModel().getSelectedItem();
         
         categorySelector.setItems(observableCatList);
         expenseList.setItems(observableChargeList);
-        expenseList.setCellFactory(param -> new ExpenseCardListCell());
+        expenseList.setCellFactory(param -> new ExpenseCardListCell(observableChargeList));
+        
+        categorySelector.getSelectionModel().selectedItemProperty().addListener((ob, oldVal, newVal) -> {
+            try {
+                List<Charge> auxList = new ArrayList<>();
+                if(newVal == null) {
+                    auxList = account.getUserCharges();
+                } else {
+                    List<Charge> aux = account.getUserCharges();
+                    for(Charge auxCharge : aux) {
+                        if(auxCharge.getCategory().equals(newVal)) {
+                            auxList.add(auxCharge);
+                        }
+                    }
+                }
+                
+                chargeList = auxList;
+                observableChargeList = FXCollections.observableArrayList(chargeList);
+                expenseList.setItems(observableChargeList);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        });
         
         categorySelector.setConverter(new StringConverter<Category>() {
             @Override
@@ -123,6 +145,7 @@ public class ExpenseAccountController implements Initializable {
             }
         });
         
+        categorySelector.setTooltip(new Tooltip("Select a category"));
     }    
     
     public void initExpenseAccountPage(Stage stage){
@@ -144,7 +167,7 @@ public class ExpenseAccountController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SameMonthLastYear.fxml"));
             //Stage stage = new Stage();
             BorderPane root = loader.load();
-            // TODO: Add controller and call the init method similar to
+            
             SameMonthLastYearController sameMonthController = loader.<SameMonthLastYearController>getController();
             sameMonthController.initSameMonthPage(primaryStage);
 
@@ -172,6 +195,21 @@ public class ExpenseAccountController implements Initializable {
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }
+    }
+
+    @FXML
+    private void removeFilter(ActionEvent event) {
+        try {
+            chargeList = account.getUserCharges();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        observableChargeList = FXCollections.observableList(chargeList);
+        expenseList.setItems(observableChargeList);
+    }
+    
+    public void editChargeFromList() {
+        
     }
     
 }
