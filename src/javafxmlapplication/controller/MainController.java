@@ -56,8 +56,6 @@ public class MainController implements Initializable {
     private Button editButton;
     @FXML
     private Button addButton;
-
-    
     @FXML
     private Text nameLabel;
     @FXML
@@ -85,7 +83,6 @@ public class MainController implements Initializable {
         try{
             account = Acount.getInstance();
             user = account.getLoggedUser();
-            System.out.println(user.getName());
         } catch (AcountDAOException e) {
             System.err.println(e);
         } catch (IOException ioe) {
@@ -98,13 +95,14 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             System.err.println(e);
         }
-        
+        usernameLabel.setText(user.getNickName());
+        nameLabel.setText(user.getSurname() + ", " + user.getName());
+        mailLabel.setText(user.getEmail());
+        profilePicture.setImage(user.getImage());
+                
         observableDataList = FXCollections.observableList(dataList);
-        
         expenseList.setItems(observableDataList);
-        
         expenseList.setCellFactory(param -> new ExpenseCardListCell());
-        
         expenseList.refresh();
         
     }    
@@ -114,10 +112,6 @@ public class MainController implements Initializable {
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();
         
-        usernameLabel.setText(user.getNickName());
-        nameLabel.setText(user.getSurname() + ", " + user.getName());
-        mailLabel.setText(user.getEmail());
-        profilePicture.setImage(user.getImage());
     }
 
     @FXML
@@ -136,6 +130,7 @@ public class MainController implements Initializable {
             System.err.println("Unable to load that page: " + ioe);
         }
     }
+    
    @FXML
     private void onLogOutPressed(ActionEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);

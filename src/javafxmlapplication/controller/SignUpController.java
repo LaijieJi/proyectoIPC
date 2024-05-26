@@ -54,13 +54,15 @@ public class SignUpController implements Initializable {
     
     private Acount account;
     //toString() needed to convert the URL object
-    public Image emptyAvatar = new Image(getClass().getResource(
+    Image emptyAvatar = new Image(getClass().getResource(
             "../styles/resources/Profile_avatar_placeholder_large.png").toString()
                 );
-    private Image avatar = emptyAvatar;
+    private Image avatar;
          
     // variable used for checking all fields are correct
     boolean everythingOK = false;
+    
+    private static boolean isAvatEmpty = false;
     
     @FXML
     private Button goBackButton;
@@ -120,6 +122,7 @@ public class SignUpController implements Initializable {
         
         removePicture.toBack();
         profilePicture.setImage(emptyAvatar);
+        isAvatEmpty = true;
         confirmPasswordField.setDisable(true);
         
         /***viewPasswordButton config***/
@@ -153,7 +156,15 @@ public class SignUpController implements Initializable {
     @FXML
     private void onGobackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle); 
+        primaryStage.setTitle(primaryTitle);
+    }
+    
+    public static boolean getIsAvatEmpty() {
+        return isAvatEmpty;
+    }
+    
+    public static void setIsAvatEmpty(boolean newValue) {
+        isAvatEmpty = newValue;
     }
 
     @FXML
@@ -223,6 +234,8 @@ public class SignUpController implements Initializable {
         if(everythingOK) {
             System.out.println("everything ok");
             boolean registered = false;
+            //In order for Picture removal in Profile Settings to go smoothly
+            
             try{
                 registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
                         usernameField.getText() , password, profilePicture.getImage(), LocalDate.now());
@@ -350,7 +363,8 @@ public class SignUpController implements Initializable {
         
         avatar = new Image(selectedFile.toURI().toString());
         //The avatar gets cut to fit the ImageView squared shape
-        profilePicture.setImage(cropSquaredCenter(avatar));        
+        profilePicture.setImage(cropSquaredCenter(avatar));
+        isAvatEmpty = false;
     }
     
     //To crop the given image into a centered square, if not square-shaped already
@@ -388,6 +402,7 @@ public class SignUpController implements Initializable {
         else {   
             profilePicture.setImage(emptyAvatar);
             profilePicture.setOpacity(1);
+            isAvatEmpty = true;
         }
     }
       
