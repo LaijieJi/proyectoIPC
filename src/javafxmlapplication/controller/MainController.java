@@ -27,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
@@ -95,14 +96,18 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             System.err.println(e);
         }
+        
+        observableDataList = FXCollections.observableArrayList(dataList);
+        
+        expenseList.setItems(observableDataList);
+        
+        expenseList.setCellFactory(param -> new ExpenseCardListCell(observableDataList));
+        
         usernameLabel.setText(user.getNickName());
         nameLabel.setText(user.getSurname() + ", " + user.getName());
         mailLabel.setText(user.getEmail());
-        profilePicture.setImage(user.getImage());
-                
-        observableDataList = FXCollections.observableList(dataList);
-        expenseList.setItems(observableDataList);
-        expenseList.setCellFactory(param -> new ExpenseCardListCell());
+        profilePicture.setImage(user.getImage());  
+
         expenseList.refresh();
         
     }    
@@ -168,12 +173,28 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/UpdateExpense.fxml"));
             BorderPane root = loader.load();
             
-            UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
-            updateExpenseController.initUpdateExpense(primaryStage);
+            //UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
+            //updateExpenseController.initUpdateExpense(primaryStage);
 
             Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Add Expense");
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Add Expense");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+            try{
+                categoryList = account.getUserCategories();
+                dataList = account.getUserCharges();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+
+            observableDataList = FXCollections.observableArrayList(dataList);
+
+            expenseList.setItems(observableDataList);
+            
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }

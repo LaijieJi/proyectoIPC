@@ -19,6 +19,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
@@ -73,6 +74,8 @@ public class CategoryCardController implements Initializable {
             String s[] = category.getDescription().split("/");
             if (s.length > 1) description.setText(s[1]);
             else description.setText("");
+            System.out.println(s[0]);
+            colorCircle.setFill(Color.valueOf(s[0]));
         }
     }
 }

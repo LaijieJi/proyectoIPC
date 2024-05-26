@@ -12,11 +12,15 @@ import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Acount;
@@ -48,6 +52,10 @@ public class ModifyCategoryController implements Initializable {
     private String primaryTitle;
     
     private boolean newC = false;
+    @FXML
+    private AnchorPane anchorPane;
+    @FXML
+    private Pane pane;
     
     /**
      * Initializes the controller class.
@@ -62,6 +70,11 @@ public class ModifyCategoryController implements Initializable {
         } catch (IOException ioe) {
             System.err.println(ioe);
         }
+        
+        pane.setPrefHeight(250);
+        pane.setPrefWidth(600);
+        pane.setMinHeight(250);
+        pane.setMinWidth(600);
         
         acceptButton.disableProperty().bind(nameText.textProperty().isEmpty());
         

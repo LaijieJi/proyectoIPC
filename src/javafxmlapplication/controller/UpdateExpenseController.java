@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,6 +27,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -73,6 +76,8 @@ public class UpdateExpenseController implements Initializable {
     private Image invoice;
     
     List<Category> categories;
+    @FXML
+    private Button goBack;
     
     /**
      * Initializes the controller class.
@@ -96,9 +101,9 @@ public class UpdateExpenseController implements Initializable {
     }    
 
     public void initUpdateExpense(Stage stage){
-        primaryStage = stage;
+        /*primaryStage = stage;
         primaryScene = primaryStage.getScene();
-        primaryTitle = primaryStage.getTitle();
+        primaryTitle = primaryStage.getTitle();*/
         nameField.setPromptText("Write a name for the expense here");
         costField.setText("0.0");
         unitField.setText("1");
@@ -118,9 +123,10 @@ public class UpdateExpenseController implements Initializable {
     
     @FXML
     private void cancelAction(ActionEvent event) {
-        primaryStage.setScene(primaryScene);
+        /*primaryStage.setScene(primaryScene);
         primaryStage.setTitle(primaryTitle);
-        primaryStage.show();
+        primaryStage.show();*/
+        cancelButton.getScene().getWindow().hide();
     }
 
     @FXML
@@ -134,9 +140,26 @@ public class UpdateExpenseController implements Initializable {
         }catch (AcountDAOException e){
             System.out.println(e);
         }
-        primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle);
-        primaryStage.show();
+        cancelButton.getScene().getWindow().hide();
+        /*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+        Stage stage = new Stage();
+        try {
+            BorderPane root = loader.load();
+        
+            MainController mainController = loader.<MainController>getController();
+            mainController.initMain(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Main Page");
+            //primaryStage.setScene(primaryScene);
+            //primaryStage.setTitle(primaryTitle);
+            primaryStage.show();
+        } catch (Exception e) {
+            System.err.println(e);
+        }*/
+        
     }
 
     @FXML
@@ -149,6 +172,7 @@ public class UpdateExpenseController implements Initializable {
         invoice = new Image(selectedFile.toURI().toString());
         invoiceText.textProperty().setValue(selectedFile.getName());
         deleteInvoice.textProperty().setValue(" Delete");
+        deleteInvoice.setFill(Color.BLUE);
     }
 
     @FXML
@@ -156,5 +180,14 @@ public class UpdateExpenseController implements Initializable {
         invoice = null;
         invoiceText.setText("");
         deleteInvoice.setText("");
+    }
+
+    @FXML
+    private void onGoBack(ActionEvent event) {
+        /*
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle(primaryTitle);
+        primaryStage.show();*/
+        cancelButton.getScene().getWindow().hide();
     }
 }

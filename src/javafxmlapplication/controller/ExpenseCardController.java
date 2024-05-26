@@ -13,11 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Window;
+import model.Acount;
+import model.AcountDAOException;
 import model.Charge;
 
 public class ExpenseCardController implements Initializable {
+    
+    private Acount account;
 
     private Charge charge;
     
@@ -34,18 +39,33 @@ public class ExpenseCardController implements Initializable {
     @FXML
     private HBox cell;
 
+    private Runnable deleteAction;
+    
     private ContextMenu contextualMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            account = Acount.getInstance();
+        } catch (AcountDAOException e) {
+            System.err.println(e);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
+
         contextualMenu = new ContextMenu();
 
         MenuItem edit = new MenuItem("Edit");
         MenuItem delete = new MenuItem("Delete");
 
         edit.setOnAction(e -> editCharge(charge));
-        delete.setOnAction(e -> deleteCharge(charge));
-
+        delete.setOnAction(e -> {
+            deleteCharge(charge);
+            if(deleteAction != null) {
+                deleteAction.run();
+            }
+        });
+        
         contextualMenu.getItems().addAll(edit, delete);
         threeDotButton.setContextMenu(contextualMenu);
         
@@ -57,7 +77,9 @@ public class ExpenseCardController implements Initializable {
             title.setText(charge.getName());
             description.setText(charge.getDescription());
             costLabel.setText(String.valueOf(charge.getCost()));
-        }
+            String[] s = charge.getCategory().getDescription().split("/");
+            colorCircle.setFill(Color.valueOf(s[0]));
+         }
     }
 
     @FXML
@@ -72,6 +94,16 @@ public class ExpenseCardController implements Initializable {
     }
 
     private void deleteCharge(Charge deletingCharge) {
-        // Delete logic here
+        try {
+            account.removeCharge(deletingCharge);
+            
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
+    
+    public void setDeleteAction(Runnable deleteAction) {
+        this.deleteAction = deleteAction;
+    }
+    
 }
