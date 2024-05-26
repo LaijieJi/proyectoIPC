@@ -243,13 +243,7 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="91.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="681.3646484375">
-               <font>
-                  <Font size="42.0" />
-               </font>
-            </Text>
             <Button fx:id="goBackButton" layoutX="41.0" layoutY="46.0" mnemonicParsing="false" onAction="#onGoBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="40.0" />
-            <Text layoutX="442.0" layoutY="27.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0" />
          </children>
       </AnchorPane>
    </top>

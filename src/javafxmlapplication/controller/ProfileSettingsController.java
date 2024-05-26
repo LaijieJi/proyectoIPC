@@ -352,6 +352,60 @@ public class ProfileSettingsController implements Initializable {
         
         //3rd: set Profile Picture
         user.setImage(avatar);
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+            BorderPane root = loader.load();
+            
+            MainController mainController = loader.<MainController>getController();
+            mainController.initMain(primaryStage);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            alert.getDialogPane().getStyleClass().add("alert");
+            alert.setTitle("Saved changes");
+            alert.setHeaderText(null);
+            alert.setContentText("Your changes have been saved.");
+            alert.showAndWait();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Main");
+            primaryStage.setResizable(true);
+        } catch (IOException ioe) {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
+        }
     }
     
     

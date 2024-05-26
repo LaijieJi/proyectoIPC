@@ -130,10 +130,10 @@ public class YearComparisonController implements Initializable {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         BarChart chart = new BarChart<String, Number>(xAxis, yAxis);
-        chart.setTitle("Month Comparison");
+        chart.setTitle("Year Comparison");
         chart.setBarGap(1.0);
         chart.setAnimated(false);
-        chart.setLegendSide(Side.RIGHT);
+        chart.setLegendSide(Side.BOTTOM);
 
         double[] months = new double[13];
 

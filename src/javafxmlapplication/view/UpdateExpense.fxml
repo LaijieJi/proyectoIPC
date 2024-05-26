@@ -12,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="620.0" prefWidth="930.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.UpdateExpenseController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.UpdateExpenseController">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="30.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER" spacing="20.0">
+                  <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
                         <TextField fx:id="nameField" prefHeight="25.0" prefWidth="250.0" />
@@ -30,7 +30,12 @@
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cost:" />
-                        <TextField fx:id="costField" prefHeight="25.0" prefWidth="100.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="112.0">
+                           <children>
+                              <TextField fx:id="costField" prefHeight="25.0" prefWidth="100.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="€" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="10.0">
@@ -41,31 +46,32 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="40.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" />
-                        <ComboBox fx:id="categorySelection" prefHeight="25.0" prefWidth="250.0" />
+                        <ComboBox fx:id="categorySelection" prefHeight="26.0" prefWidth="230.0" />
+                        <Button fx:id="addCategoryButton" mnemonicParsing="false" onAction="#addCategoryAction" text="+" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-                        <DatePicker fx:id="dateSelection" prefHeight="25.0" prefWidth="250.0" />
+                        <DatePicker fx:id="dateSelection" prefHeight="26.0" prefWidth="231.0" />
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="168.0" prefWidth="800.0" spacing="20.0">
                <children>
-                  <HBox fillHeight="false" spacing="5.0">
+                  <HBox fillHeight="false" prefHeight="200.0" prefWidth="642.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></Text>
-                        <TextField fx:id="descriptionField" alignment="TOP_LEFT" prefHeight="150.0" prefWidth="560.0" />
+                        <TextField fx:id="descriptionField" alignment="TOP_LEFT" prefHeight="122.0" prefWidth="560.0" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -74,7 +80,7 @@
                         <Insets top="25.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="130.0" />
+                        <Insets left="80.0" />
                      </HBox.margin>
                   </HBox>
                </children>
@@ -92,11 +98,13 @@
                   <Text fx:id="invoiceText" strokeType="OUTSIDE" strokeWidth="0.0">
                      <HBox.margin>
                         <Insets left="10.0" />
-                     </HBox.margin></Text>
-                  <Text fx:id="deleteInvoice" onMousePressed="#deleteInvoiceAction" strokeType="OUTSIDE" strokeWidth="0.0">
+                     </HBox.margin>
+                  </Text>
+                  <Text fx:id="deleteInvoice" onMousePressed="#deleteInvoiceAction" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-delete">
                      <HBox.margin>
                         <Insets left="10.0" />
-                     </HBox.margin></Text>
+                     </HBox.margin>
+                  </Text>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">

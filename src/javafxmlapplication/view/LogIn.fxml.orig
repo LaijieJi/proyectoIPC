@@ -14,12 +14,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
+<BorderPane fx:id="borderPane" maxHeight="500.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
+=======
 <BorderPane fx:id="borderPane" maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogInController">
+>>>>>>> bfff54efbabb881a5e83c94451dde9e7c5240d88
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" StackPane.alignment="CENTER">
                <children>
+<<<<<<< HEAD
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-header" text="Log In">
+=======
                   <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../styles/resources/finanzas.png" />
@@ -29,13 +36,20 @@
                      </VBox.margin>
                   </ImageView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-header" text="Log in">
+>>>>>>> bfff54efbabb881a5e83c94451dde9e7c5240d88
                      <VBox.margin>
                         <Insets bottom="40.0" />
                      </VBox.margin>
                      <font>
+<<<<<<< HEAD
                         <Font size="36.0" />
                      </font></Text>
                   <VBox alignment="CENTER" VBox.vgrow="NEVER">
+=======
+                        <Font size="30.0" />
+                     </font></Text>
+                  <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="NEVER">
+>>>>>>> bfff54efbabb881a5e83c94451dde9e7c5240d88
                      <children>
                         <VBox alignment="CENTER_LEFT" fillWidth="false" VBox.vgrow="NEVER">
                            <children>

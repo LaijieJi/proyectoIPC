@@ -35,10 +35,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Acount;
 import model.AcountDAOException;
@@ -86,6 +88,8 @@ public class UpdateExpenseController implements Initializable {
     List<Category> categories;
     @FXML
     private Button goBackButton;
+    @FXML
+    private Button addCategoryButton;
 
     
     /**
@@ -350,8 +354,9 @@ public class UpdateExpenseController implements Initializable {
         }
         invoice = new Image(selectedFile.toURI().toString());
         invoiceText.textProperty().setValue(selectedFile.getName());
-        deleteInvoice.textProperty().setValue(" Delete");
+        deleteInvoice.textProperty().setValue(" Delete.");
         deleteInvoice.setFill(Color.BLUE);
+        deleteInvoice.setFocusTraversable(true);
     }
 
     @FXML
@@ -359,6 +364,94 @@ public class UpdateExpenseController implements Initializable {
         invoice = null;
         invoiceText.setText("");
         deleteInvoice.setText("");
+    }
+
+    @FXML
+    private void addCategoryAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ModifyCategory.fxml"));
+            Pane root = loader.load();
+            
+            ModifyCategoryController modifyCategories = loader.<ModifyCategoryController>getController();
+            modifyCategories.initFields(null,null);
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Modify category");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+            categories = account.getUserCategories();
+            List<String> l = categories.stream().map(Category::getName).collect(Collectors.toList());
+            ObservableList<String> categoriesl = FXCollections.observableList(l);
+            categorySelection.setItems(categoriesl);
+            
+        } catch (IOException ioe) {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("Unable to load the page");
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ioe.printStackTrace(pw);
+            String exceptionText = sw.toString();
+            
+            Label label = new Label("Exception:");
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+            
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+            
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
+        } catch (AcountDAOException ex) {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            DialogPane dialogPane = error.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
+            error.getDialogPane().getStyleClass().add("alert");
+            error.setTitle("Exception Dialog");
+            error.setHeaderText(null);
+            error.setContentText("An error has occurred while adding the category");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("Exception:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea,Priority.ALWAYS);
+            GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0 ,1);
+
+            error.getDialogPane().setExpandableContent(expContent);
+            error.showAndWait();
+        }
     }
 
     @FXML

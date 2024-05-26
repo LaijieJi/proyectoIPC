@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafxmlapplication.controller.LogInController;
 
@@ -31,6 +32,8 @@ public class JavaFXMLApplication extends Application {
         // 3- asignación de la escena al Stage que recibe el metodo 
         //     - configuracion del stage
         //     - se muestra el stage de manera no modal mediante el metodo show()
+        Image icon = new Image("finanzas.png");
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.setResizable(false);
