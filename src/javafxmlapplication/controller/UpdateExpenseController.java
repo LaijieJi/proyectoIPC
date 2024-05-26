@@ -76,8 +76,7 @@ public class UpdateExpenseController implements Initializable {
     private Image invoice;
     
     List<Category> categories;
-    @FXML
-    private Button goBack;
+
     
     /**
      * Initializes the controller class.
@@ -104,21 +103,20 @@ public class UpdateExpenseController implements Initializable {
         /*primaryStage = stage;
         primaryScene = primaryStage.getScene();
         primaryTitle = primaryStage.getTitle();*/
-        nameField.setPromptText("Write a name for the expense here");
-        costField.setText("0.0");
-        unitField.setText("1");
-        descriptionField.setPromptText("Write a description for the expense here");
-        categorySelection.getSelectionModel().clearSelection();
-        dateSelection.setValue(LocalDate.now());
     }
     
-    public void initExpense(Charge charge){
-        nameField.setText(charge.getName());
-        costField.setText(Double.toString(charge.getCost()));
-        unitField.setText(Integer.toString(charge.getUnits()));
-        descriptionField.setText(charge.getDescription());
-        categorySelection.setValue(charge.getCategory().getName());
-        dateSelection.setValue(charge.getDate());
+    public void initExpense(String name, double cost, int units, String description, Category category, LocalDate date){
+        if (name != null) nameField.setText(name);
+        else nameField.setPromptText("Write a name for the expense here");
+        costField.setText(Double.toString(cost));
+        unitField.setText(Integer.toString(units));
+        if (description != null) descriptionField.setText(description);
+        else descriptionField.setPromptText("Write a description for the expense here");
+        if (category != null) categorySelection.setValue(category.getName());
+        else categorySelection.getSelectionModel().clearSelection();
+        if (date != null) dateSelection.setValue(date);
+        else dateSelection.setValue(LocalDate.now());
+        
     }
     
     @FXML
@@ -180,14 +178,5 @@ public class UpdateExpenseController implements Initializable {
         invoice = null;
         invoiceText.setText("");
         deleteInvoice.setText("");
-    }
-
-    @FXML
-    private void onGoBack(ActionEvent event) {
-        /*
-        primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle);
-        primaryStage.show();*/
-        cancelButton.getScene().getWindow().hide();
     }
 }

@@ -2,19 +2,29 @@ package javafxmlapplication.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.Acount;
 import model.AcountDAOException;
@@ -90,15 +100,75 @@ public class ExpenseCardController implements Initializable {
     }
 
     private void editCharge(Charge editingCharge) {
-        // Edit logic here
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/UpdateExpense.fxml"));
+            BorderPane root = loader.load();
+            
+            UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
+            updateExpenseController.initExpense(editingCharge.getName(), editingCharge.getCost(), editingCharge.getUnits(), editingCharge.getDescription(), editingCharge.getCategory(), editingCharge.getDate());
+
+            
+            FXMLLoader loader1 = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+            BorderPane root1 = loader1.load();
+
+            MainController mainController = loader1.<MainController>getController();
+            
+            try {
+                account.removeCharge(editingCharge);
+                mainController.observableDataList.remove(editingCharge);
+            } catch (AcountDAOException ex) {
+                System.err.println(ex);
+            }
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Add Expense");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+            
+            
+            try{
+                mainController.categoryList = account.getUserCategories();
+                mainController.dataList = account.getUserCharges();
+                mainController.observableDataList = FXCollections.observableArrayList(mainController.dataList);
+                mainController.expenseList.setItems(mainController.observableDataList);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+            mainController.expenseList.refresh();
+            mainController.expenseList.getSelectionModel().selectLast();
+        } catch (IOException ioe) {
+            System.err.println("Unable to load that page: " + ioe);
+        }
     }
 
     private void deleteCharge(Charge deletingCharge) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
         try {
-            account.removeCharge(deletingCharge);
-            
-        } catch (Exception e) {
-            System.err.println(e);
+            BorderPane root = loader.load();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+
+        MainController mainController = loader.<MainController>getController();
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete charge");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this charge?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            try {
+                account.removeCharge(deletingCharge);
+                mainController.observableDataList.remove(deletingCharge);
+                mainController.expenseList.getSelectionModel().clearSelection();
+            } catch (AcountDAOException ex) {
+                System.err.println(ex);
+            }
         }
     }
     

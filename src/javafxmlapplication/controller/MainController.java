@@ -72,7 +72,7 @@ public class MainController implements Initializable {
     @FXML
     private Button compareExpenseButton;
     @FXML
-    private ListView<Charge> expenseList;
+    public ListView<Charge> expenseList;
     @FXML
     private Button logOutButton;
 
@@ -107,8 +107,6 @@ public class MainController implements Initializable {
         nameLabel.setText(user.getSurname() + ", " + user.getName());
         mailLabel.setText(user.getEmail());
         profilePicture.setImage(user.getImage());  
-
-        expenseList.refresh();
         
     }    
     
@@ -170,8 +168,8 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/UpdateExpense.fxml"));
             BorderPane root = loader.load();
             
-            //UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
-            //updateExpenseController.initUpdateExpense(primaryStage);
+            UpdateExpenseController updateExpenseController = loader.<UpdateExpenseController>getController();
+            updateExpenseController.initExpense(null, 0.0, 1, null, null, null);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -184,18 +182,16 @@ public class MainController implements Initializable {
             try{
                 categoryList = account.getUserCategories();
                 dataList = account.getUserCharges();
+                observableDataList = FXCollections.observableArrayList(dataList);
+                expenseList.setItems(observableDataList);
             } catch (Exception e) {
                 System.err.println(e);
             }
-
-            observableDataList = FXCollections.observableArrayList(dataList);
-
-            expenseList.setItems(observableDataList);
-            
+            expenseList.refresh();
+            expenseList.getSelectionModel().selectLast();
         } catch (IOException ioe) {
             System.err.println("Unable to load that page: " + ioe);
         }
-        expenseList.refresh();
     }
 
     @FXML
