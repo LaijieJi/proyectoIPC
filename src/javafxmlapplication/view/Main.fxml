@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.MainController">
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SuperApp" BorderPane.alignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="SuperApp" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </BorderPane.margin>
@@ -53,7 +53,7 @@
                         <Insets />
                      </GridPane.margin>
                   </VBox>
-                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editProfile" prefHeight="30.0" prefWidth="40.0" text="✎" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editProfile" prefHeight="45.0" prefWidth="50.0" text="✎" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -62,7 +62,7 @@
                         <ImageView fx:id="profilePicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </VBox>
-                  <Text fx:id="usernameLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="(Username)" GridPane.rowIndex="1">
+                  <Text fx:id="usernameLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-header" text="(Username)" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -123,7 +123,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="deleteButton" maxHeight="-Infinity" maxWidth="80.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="30.0" prefWidth="30.0">
+                  <Button fx:id="deleteButton" maxHeight="-Infinity" maxWidth="80.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="50.0" prefWidth="50.0">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -150,7 +150,7 @@
       <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutPressed" prefHeight="30.0" prefWidth="40.0" text="←]" BorderPane.alignment="CENTER_LEFT">
+      <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutPressed" prefHeight="35.0" prefWidth="40.0" text="←]" BorderPane.alignment="CENTER_LEFT">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" />
          </BorderPane.margin>

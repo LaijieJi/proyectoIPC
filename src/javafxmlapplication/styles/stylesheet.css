@@ -3,9 +3,74 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : May 14, 2024, 9:31:39 AM
-    Author     : laijie
+
 */
+
+.root{
+    -fx-background-color: beige;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+}
+
+.button{
+    -fx-background-color: #03a8c9;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
+    -fx-text-fill: black;
+}
+.button:focused, .button:hover{
+    -fx-font-weight: bold;
+    -fx-font-size: 12.5px;
+    -fx-border-color: #fdde55;
+}
+.button:pressed{
+    -fx-background-color: #03bde2;
+}
+
+.header{
+    -fx-background-color: #feefad;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.sub-header{
+    -fx-font-weight: bold;
+}
+
+.alert{
+    -fx-background-color: white;
+}
+
+.alert:header .header-panel{
+    -fx-background-color: #0393b0;
+}
+
+.alert:header .header-panel .label{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.alert .label.content{
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.alert .button-bar .container{
+    -fx-background-color: white;
+}
+
+.alert .button{
+    -fx-background-color: #0393b0;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+}
+
+.alert .button-bar .button:hover, alert .button-bar> .button:focussed{
+    -fx-background-color: #03aed2;
+}
 
 .errorText {
     -fx-text-fill: red;
