@@ -29,6 +29,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -52,10 +53,16 @@ public class SignUpController implements Initializable {
     private String username;
     
     private Acount account;
-    private Image avatar = null;
-    
+    //toString() needed to convert the URL object
+    Image emptyAvatar = new Image(getClass().getResource(
+            "../styles/resources/Profile_avatar_placeholder_large.png").toString()
+                );
+    private Image avatar;
+         
     // variable used for checking all fields are correct
     boolean everythingOK = false;
+    
+    private static boolean isAvatEmpty = false;
     
     @FXML
     private Button goBackButton;
@@ -97,6 +104,8 @@ public class SignUpController implements Initializable {
     private Text confirmPasswordMessage;
     @FXML
     private Text usernameWarningText;
+    @FXML
+    private Text removePicture;
 
     /**
      * Initializes the controller class.
@@ -111,6 +120,9 @@ public class SignUpController implements Initializable {
             System.err.println(ioe);
         }
         
+        removePicture.toBack();
+        profilePicture.setImage(emptyAvatar);
+        isAvatEmpty = true;
         confirmPasswordField.setDisable(true);
         
         /***viewPasswordButton config***/
@@ -144,7 +156,15 @@ public class SignUpController implements Initializable {
     @FXML
     private void onGobackButtonPressed(ActionEvent event) {
         primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle); 
+        primaryStage.setTitle(primaryTitle);
+    }
+    
+    public static boolean getIsAvatEmpty() {
+        return isAvatEmpty;
+    }
+    
+    public static void setIsAvatEmpty(boolean newValue) {
+        isAvatEmpty = newValue;
     }
 
     @FXML
@@ -205,6 +225,7 @@ public class SignUpController implements Initializable {
         } else if(!passwordConfirmation.equals(password)) {
                 everythingOK &= false;
                 confirmPasswordMessage.setVisible(true);
+                passwordLabel.setFill(Color.INDIANRED);
         } else {
             passwordLabel.setFill(Color.BLACK);
         }
@@ -213,6 +234,8 @@ public class SignUpController implements Initializable {
         if(everythingOK) {
             System.out.println("everything ok");
             boolean registered = false;
+            //In order for Picture removal in Profile Settings to go smoothly
+            
             try{
                 registered = account.registerUser(nameField.getText(), surnameField.getText() , emailField.getText() ,
                         usernameField.getText() , password, profilePicture.getImage(), LocalDate.now());
@@ -340,8 +363,8 @@ public class SignUpController implements Initializable {
         
         avatar = new Image(selectedFile.toURI().toString());
         //The avatar gets cut to fit the ImageView squared shape
-        profilePicture.setImage(cropSquaredCenter(avatar)); 
-        
+        profilePicture.setImage(cropSquaredCenter(avatar));
+        isAvatEmpty = false;
     }
     
     //To crop the given image into a centered square, if not square-shaped already
@@ -361,6 +384,31 @@ public class SignUpController implements Initializable {
             
             return croppedImage;
         }
+    }
+    
+    
+    /***ALL: Profile Picture removal***/
+    @FXML
+    private void onProfilePictureEntered(MouseEvent event) {
+        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        else {   
+            profilePicture.setOpacity(0.5);
+        }
+    }
+    
+    @FXML
+    private void onProfilePictureClicked(MouseEvent event){
+        if(profilePicture.getImage().equals(emptyAvatar)) return;
+        else {   
+            profilePicture.setImage(emptyAvatar);
+            profilePicture.setOpacity(1);
+            isAvatEmpty = true;
+        }
+    }
+      
+    @FXML
+    private void onProfilePictureExited(MouseEvent event) {
+        profilePicture.setOpacity(1);
     }
     
     
@@ -426,5 +474,4 @@ public class SignUpController implements Initializable {
             createAccountButton.requestFocus();
         }
     }
-
 }
