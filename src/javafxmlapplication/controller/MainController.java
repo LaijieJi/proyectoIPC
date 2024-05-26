@@ -324,6 +324,7 @@ public class MainController implements Initializable {
 
                     error.getDialogPane().setExpandableContent(expContent);
                     error.showAndWait();
+                    account.logOutUser();
                 }
             }
         } 
