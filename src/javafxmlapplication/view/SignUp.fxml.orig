@@ -130,7 +130,11 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="456.0" />
+<<<<<<< HEAD
                               <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" text="👁">
+=======
+                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="👁">
+>>>>>>> origin/main
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>

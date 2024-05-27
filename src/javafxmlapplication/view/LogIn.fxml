@@ -78,7 +78,7 @@
                               <Label fx:id="passwordErrorText" styleClass="errorText" />
                            </children>
                         </VBox>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonPressed" onKeyPressed="#onKeyPressedOnLogin" prefHeight="35.0" prefWidth="99.0" text="LOG IN">
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginButtonPressed" onKeyPressed="#onKeyPressedOnLogin" prefHeight="35.0" prefWidth="99.0" text="Log In">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin></Button>
