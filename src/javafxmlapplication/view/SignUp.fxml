@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="921.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -130,7 +130,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="456.0" />
-                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="33.0" text="👁">
+                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -208,6 +208,11 @@
                <font>
                   <Font size="15.0" />
                </font></Button>
+            <Text layoutX="376.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </top>

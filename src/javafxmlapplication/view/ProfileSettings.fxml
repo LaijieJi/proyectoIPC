@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ProfileSettingsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ProfileSettingsController">
    <left>
       <VBox prefHeight="315.0" prefWidth="504.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -116,7 +116,7 @@
                         <HBox>
                            <children>
                               <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressedOnPassword" onKeyTyped="#onPasswordWritten" prefHeight="26.0" prefWidth="454.0" />
-                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="👁">
+                              <Button fx:id="viewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin></Button>
@@ -152,7 +152,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </PasswordField>
-                              <Button fx:id="viewNewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="👁">
+                              <Button fx:id="viewNewPasswordButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" text="👁">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -243,7 +243,12 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="922.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="goBackButton" layoutX="41.0" layoutY="46.0" mnemonicParsing="false" onAction="#onGoBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="40.0" />
+            <Button fx:id="goBackButton" layoutX="41.0" layoutY="46.0" mnemonicParsing="false" onAction="#onGoBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="35.0" />
+            <Text layoutX="89.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" AnchorPane.topAnchor="21.0">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </top>

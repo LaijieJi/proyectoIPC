@@ -293,7 +293,7 @@ public class MainController implements Initializable {
 
                     Scene scene = new Scene(root);
                     primaryStage.setScene(scene);
-                    primaryStage.setTitle("Log in");
+                    primaryStage.setTitle("Log In");
                     primaryStage.setResizable(false);
                 } catch (Exception e) {
                     Alert error = new Alert(AlertType.ERROR);

@@ -35,7 +35,7 @@ public class JavaFXMLApplication extends Application {
         Image icon = new Image("finanzas.png");
         stage.getIcons().add(icon);
         stage.setScene(scene);
-        stage.setTitle("Login");
+        stage.setTitle("Log In");
         stage.setResizable(false);
         stage.show();
     }

@@ -9,8 +9,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ManageCategoriesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ManageCategoriesController">
    <center>
       <HBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
@@ -51,11 +53,19 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="35.0" prefWidth="40.0" text="◄">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
                      <HBox.margin>
-                        <Insets left="20.0" top="20.0" />
+                        <Insets left="35.0" top="35.0" />
                      </HBox.margin>
                   </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Categories">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="25.0" />
+                     </HBox.margin>
+                  </Text>
                </children>
             </HBox>
          </children>

@@ -28,12 +28,12 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-header" text="Log in">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-header" text="Log In">
                      <VBox.margin>
                         <Insets bottom="40.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="36.0" />
+                        <Font size="40.0" />
                      </font></Text>
                   <VBox alignment="CENTER" VBox.vgrow="NEVER">
                      <children>
@@ -47,7 +47,7 @@
                                     <Insets bottom="2.0" />
                                  </VBox.margin>
                               </Text>
-                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" prefHeight="26.0" prefWidth="400.0" />
+                              <TextField fx:id="nickNameInput" onKeyPressed="#onKeyPressedOnNickName" onKeyTyped="#onNickNameWritten" prefHeight="26.0" prefWidth="400.0" />
                               <Label fx:id="nickNameErrorText" styleClass="errorText" />
                            </children>
                         </VBox>
@@ -107,7 +107,10 @@
    <top>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CashTrack" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CashTrack">
+               <font>
+                  <Font name="Bernard MT Condensed" size="12.0" />
+               </font></Text>
          </children>
       </HBox>
    </top>

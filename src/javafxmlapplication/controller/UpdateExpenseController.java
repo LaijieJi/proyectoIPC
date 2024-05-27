@@ -214,7 +214,7 @@ public class UpdateExpenseController implements Initializable {
             error.getDialogPane().getStyleClass().add("alert");
             error.setTitle("Exception Dialog");
             error.setHeaderText("Invalid format for Amount field");
-            error.setContentText("The value for amount field must be a number. A value by default was set instead.");
+            error.setContentText("Numeric value required. A value by default will be set instead.");
             
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
@@ -340,21 +340,25 @@ public class UpdateExpenseController implements Initializable {
     @FXML
     private void onAddInvoicePressed(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        
+        //Selection extension filters
+        fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("All Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp"),
+        new FileChooser.ExtensionFilter("JPG, JPEG", "*.jpg", "*.jpeg"),
+        new FileChooser.ExtensionFilter("PNG", "*.png"),
+        new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+        new FileChooser.ExtensionFilter("PDF", "*.pdf")
+        );
+        
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        
         if(selectedFile == null) {
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            DialogPane dialogPane = error.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("../styles/stylesheet.css").toExternalForm());
-            error.getDialogPane().getStyleClass().add("alert");
-            error.setTitle("Exception Dialog");
-            error.setHeaderText(null);
-            error.setContentText("An error has occurred trying to open the file");
-            error.showAndWait();
             return;
         }
+        
         invoice = new Image(selectedFile.toURI().toString());
         invoiceText.textProperty().setValue(selectedFile.getName());
-        deleteInvoice.textProperty().setValue(" Delete.");
+        deleteInvoice.textProperty().setValue("Remove.");
         deleteInvoice.setFill(Color.BLUE);
         deleteInvoice.setFocusTraversable(true);
     }

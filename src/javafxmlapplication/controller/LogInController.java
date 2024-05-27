@@ -145,6 +145,9 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
         
+        nickNameInput.clear();
+        passwordInput.clear();
+        
         /***loginButton config***/
         loginButton.setDisable(true);
         logInOK = 0;
@@ -186,7 +189,7 @@ public class LogInController implements Initializable {
             if(login) {
                 onUserLogged();
             } else {
-                passwordErrorText.setText("Credentials are incorrect, please try again");
+                passwordErrorText.setText("Wrong credentials, please try again");
             }
         } catch (AcountDAOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
@@ -257,11 +260,21 @@ public class LogInController implements Initializable {
     }
 
     
-        @FXML
+    /***ALL: Text input listeners***/
+    @FXML
     private void onPasswordWritten(KeyEvent event) {
         seePasswordButton.setDisable(true);
-        if(!passwordInput.getText().isEmpty()) seePasswordButton.setDisable(false);
+        if(!passwordInput.getText().isEmpty()) {
+            seePasswordButton.setDisable(false);
+            passwordErrorText.setText("");
+        }
     }
+    
+    @FXML
+    private void onNickNameWritten(KeyEvent event) {
+        if(!nickNameInput.getText().isEmpty()) passwordErrorText.setText("");
+    }
+    
     
     /***ALL: Window navigation via ENTER key***/
     @FXML
@@ -318,7 +331,5 @@ public class LogInController implements Initializable {
             error.showAndWait();
         }
     }
-
-
 
 }

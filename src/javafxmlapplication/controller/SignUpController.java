@@ -223,8 +223,47 @@ public class SignUpController implements Initializable {
      
     @FXML
     private void onGobackButtonPressed(ActionEvent event) {
-        primaryStage.setScene(primaryScene);
-        primaryStage.setTitle(primaryTitle);
+       try { 
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LogIn.fxml"));
+            //Stage stage = new Stage();
+            BorderPane root = loader.load();
+            LogInController logInController = loader.<LogInController>getController();
+            logInController.initLogin(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Log In");
+        } catch (Exception e) {
+                    Alert error = new Alert(AlertType.ERROR);
+                    error.setTitle("Exception Dialog");
+                    error.setHeaderText(null);
+                    error.setContentText("Unable to load the page");
+
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    e.printStackTrace(pw);
+                    String exceptionText = sw.toString();
+
+                    Label label = new Label("Exception:");
+
+                    TextArea textArea = new TextArea(exceptionText);
+                    textArea.setEditable(false);
+                    textArea.setWrapText(true);
+
+                    textArea.setMaxWidth(Double.MAX_VALUE);
+                    textArea.setMaxHeight(Double.MAX_VALUE);
+                    GridPane.setVgrow(textArea,Priority.ALWAYS);
+                    GridPane.setHgrow(textArea,Priority.ALWAYS);
+
+                    GridPane expContent = new GridPane();
+                    expContent.setMaxWidth(Double.MAX_VALUE);
+                    expContent.add(label, 0, 0);
+                    expContent.add(textArea, 0 ,1);
+
+                    error.getDialogPane().setExpandableContent(expContent);
+                    error.showAndWait();
+                    account.logOutUser();
+                }
     }
 
     @FXML
