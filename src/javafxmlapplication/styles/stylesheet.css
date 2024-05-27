@@ -22,7 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 .button:focused, .button:hover{
     -fx-font-weight: bold;
-    -fx-font-size: 15px;
+    -fx-font-size: 14px;
     -fx-border-color: #fdde55;
 }
 
@@ -122,5 +122,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .label-email{
     -fx-font-size: 12px;
+}
+
+.password-field .text-field-prompt {
+    -fx-prompt-text-fill: black;
 }
 
