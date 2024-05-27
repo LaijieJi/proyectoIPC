@@ -62,7 +62,7 @@ public class ReportController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        locationField.setPromptText("Write here a name for the report");
+        locationField.setPromptText("Enter report name...");
         try{
             account = Acount.getInstance();
         } catch (AcountDAOException e) {

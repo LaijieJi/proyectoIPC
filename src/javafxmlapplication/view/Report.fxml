@@ -9,19 +9,29 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0" stylesheets="@../styles/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.ReportController">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="35.0" prefWidth="40.0" text="◄">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="30.0" prefWidth="40.0" text="◄">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="20.0" top="35.0" />
                </HBox.margin>
             </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Generate report">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" top="24.0" />
+               </HBox.margin>
+            </Text>
          </children>
          <BorderPane.margin>
-            <Insets top="20.0" />
+            <Insets left="15.0" />
          </BorderPane.margin>
       </HBox>
    </top>
@@ -39,6 +49,9 @@
                            <effect>
                               <BoxBlur />
                            </effect>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
                         </ImageView>
                      </children>
                      <opaqueInsets>
@@ -49,7 +62,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="570.0" prefWidth="361.0" spacing="20.0">
                <children>
-                  <TextField fx:id="locationField" prefHeight="30.0" promptText="Write a name for the report" />
+                  <TextField fx:id="locationField" prefHeight="30.0" promptText="Enter report name..." />
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveReportButtonPressed" prefHeight="25.0" prefWidth="120.0" text="Save report" />

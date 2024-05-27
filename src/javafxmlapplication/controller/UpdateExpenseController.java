@@ -182,11 +182,9 @@ public class UpdateExpenseController implements Initializable {
     
     public void initExpense(String name, double cost, int units, String description, Category category, LocalDate date){
         if (name != null) nameField.setText(name);
-        else nameField.setPromptText("Write a name for the expense here");
         costField.setText(Double.toString(cost));
         unitField.setText(Integer.toString(units));
         if (description != null) descriptionField.setText(description);
-        else descriptionField.setPromptText("Write a description for the expense here");
         if (category != null) categorySelection.setValue(category.getName());
         else categorySelection.getSelectionModel().clearSelection();
         if (date != null) dateSelection.setValue(date);
